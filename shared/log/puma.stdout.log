@@ -57,3 +57,19 @@
 === puma startup: 2020-09-30 03:54:55 +0000 ===
 [72887] * Starting control server on unix:///tmp/puma-status-1601438095019-72887
 [72887] - Worker 0 (pid: 72909) booted, phase: 0
+[72887] - Gracefully shutting down workers...
+=== puma startup: 2020-09-30 16:30:08 +0000 ===
+[84961] * Starting control server on unix:///tmp/puma-status-1601483408281-84961
+[84961] - Worker 0 (pid: 84984) booted, phase: 0
+[84961] - Gracefully shutting down workers...
+=== puma startup: 2020-09-30 16:35:08 +0000 ===
+[85355] * Starting control server on unix:///tmp/puma-status-1601483708770-85355
+[85355] - Worker 0 (pid: 85377) booted, phase: 0
+[85355] - Gracefully shutting down workers...
+=== puma startup: 2020-09-30 16:42:50 +0000 ===
+[86062] * Starting control server on unix:///tmp/puma-status-1601484170713-86062
+[86062] - Worker 0 (pid: 86085) booted, phase: 0
+[86062] - Gracefully shutting down workers...
+=== puma startup: 2020-09-30 16:44:47 +0000 ===
+[86248] * Starting control server on unix:///tmp/puma-status-1601484287400-86248
+[86248] - Worker 0 (pid: 86270) booted, phase: 0
