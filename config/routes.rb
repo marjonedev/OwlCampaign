@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  get 'session/new'
+
   resources :users
+
   class OnlyAjaxRequest
     def matches?(request)
       request.xhr?
@@ -11,5 +12,8 @@ Rails.application.routes.draw do
 
   get 'pages/home'
   get 'signup' => 'users#new', :as => "signup"
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  get 'login' => 'session#new', :as => "login"
+  post 'login' => 'session#create'
+  get 'logout' => 'session#destroy', :as => "logout"
 end
