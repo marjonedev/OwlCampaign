@@ -1,18 +1,11 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :require_admin, only: [:index]
 
   # GET /users
   # GET /users.json
   def index
-    if !logged_in?
-      redirect_to login_url
-    else
-      unless current_user.id == @user.id
-        not_found
-      end
-
-      @users = User.all
-    end
+    @users = User.all
   end
 
   # GET /users/1
