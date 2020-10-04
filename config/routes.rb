@@ -16,4 +16,6 @@ Rails.application.routes.draw do
   get 'login' => 'session#new', :as => "login"
   post 'login' => 'session#create'
   get 'logout' => 'session#destroy', :as => "logout"
+
+  get 'forgot_password', to: 'pages#forgot_password'
 end
