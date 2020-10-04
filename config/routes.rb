@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'session/new'
   resources :users
   class OnlyAjaxRequest
     def matches?(request)
