@@ -10,20 +10,5 @@
   <%= @user.email_address %>
 </p>
 
-<p>
-  <strong>Encrypted password:</strong>
-  <%= @user.encrypted_password %>
-</p>
-
-<p>
-  <strong>Salt:</strong>
-  <%= @user.salt %>
-</p>
-
-<p>
-  <strong>Admin:</strong>
-  <%= @user.admin %>
-</p>
-
 <%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<%= link_to 'Back', root_url %>
