@@ -1,6 +1,10 @@
 class User < ApplicationRecord
   attr_accessor :password
 
+  has_many :emaillist
+  has_many :contact
+  has_many :template
+
   validates_presence_of :username
   validates_confirmation_of :password
   validates_presence_of :password, :if => :password_required?
