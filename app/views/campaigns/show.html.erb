@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Emaillist:</strong>
+  <%= @campaign.emaillist_id %>
+</p>
+
+<p>
+  <strong>Template:</strong>
+  <%= @campaign.template_id %>
+</p>
+
+<p>
+  <strong>From:</strong>
+  <%= @campaign.from %>
+</p>
+
+<p>
+  <strong>Subject:</strong>
+  <%= @campaign.subject %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @campaign.content %>
+</p>
+
+<p>
+  <strong>Date send:</strong>
+  <%= @campaign.date_send %>
+</p>
+
+<p>
+  <strong>Time send:</strong>
+  <%= @campaign.time_send %>
+</p>
+
+<%= link_to 'Edit', edit_campaign_path(@campaign) %> |
+<%= link_to 'Back', campaigns_path %>

@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :templates
+  resources :campaigns
   resources :contacts
   resources :users
 

@@ -1,0 +1,52 @@
+<%= form_with(model: campaign, local: true) do |form| %>
+  <% if campaign.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(campaign.errors.count, "error") %> prohibited this campaign from being saved:</h2>
+
+      <ul>
+        <% campaign.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :emaillist_id %>
+    <%= form.number_field :emaillist_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :template_id %>
+    <%= form.number_field :template_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :from %>
+    <%= form.text_field :from %>
+  </div>
+
+  <div class="field">
+    <%= form.label :subject %>
+    <%= form.text_field :subject %>
+  </div>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date_send %>
+    <%= form.date_select :date_send %>
+  </div>
+
+  <div class="field">
+    <%= form.label :time_send %>
+    <%= form.time_select :time_send %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

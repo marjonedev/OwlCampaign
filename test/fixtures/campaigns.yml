@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  emaillist_id: 1
+  template_id: 1
+  from: MyString
+  subject: MyString
+  content: MyText
+  date_send: 2020-10-08
+  time_send: 2020-10-08 17:01:12
+
+two:
+  emaillist_id: 1
+  template_id: 1
+  from: MyString
+  subject: MyString
+  content: MyText
+  date_send: 2020-10-08
+  time_send: 2020-10-08 17:01:12
