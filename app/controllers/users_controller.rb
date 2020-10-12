@@ -42,7 +42,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      if @user.update(user_params)
+      if @user.update(update_user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
@@ -70,6 +70,11 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:username, :email_address, :encrypted_password, :salt, :admin)
+      params.require(:user).permit(:username, :email_address, :password, :referer, :admin)
     end
+
+    def update_user_params
+      params.require(:user).permit(:email_address, :password)
+    end
+
 end

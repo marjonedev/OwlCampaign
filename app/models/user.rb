@@ -14,7 +14,7 @@ class User < ApplicationRecord
   validates_presence_of :email_address
   validates_format_of :email_address, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
   validates_format_of :username, :with => /\A[a-z][a-z0-9\_]*?\Z/, :message => "must start with a letter and include only letters, numbers, and underscore."
-  validate :address_exist_validator, on: :create
+  # validate :address_exist_validator, on: :create
 
   before_save :encrypt_password
   before_validation :set_initial_content, on: [:create]
@@ -61,15 +61,15 @@ class User < ApplicationRecord
 
   protected
   # before filter
-  def encrypt_password
-    return if password.blank?
-    self.salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}---#{username}--") if new_record?
-    self.encrypted_password = encrypt(password)
-  end
+    def encrypt_password
+      return if password.blank?
+      self.salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}---#{username}--") if new_record?
+      self.encrypted_password = encrypt(password)
+    end
 
-  def password_required?
-    encrypted_password.blank? || !password.blank?
-  end
+    def password_required?
+      encrypted_password.blank? || !password.blank?
+    end
 
   private
     def generate_token

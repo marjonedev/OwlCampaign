@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   root 'pages#home'
 
   get 'pages/home'
+  get 'dashboard', to: 'pages#dashboard'
   get 'signup' => 'users#new', :as => "signup"
 
   get 'login' => 'session#new', :as => "login"

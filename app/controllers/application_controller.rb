@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   helper_method :current_user
+  helper_method :logged_in?
 
   def current_user
     if session[:user_id]
@@ -29,7 +30,7 @@ class ApplicationController < ActionController::Base
     end
 
     if current_user and !current_user.admin
-      redirect_to login_url
+      redirect_to user_url(current_user)
     end
   end
 
