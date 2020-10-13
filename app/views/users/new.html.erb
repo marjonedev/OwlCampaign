@@ -1,60 +1,26 @@
-
-
-<!-- Page Title
-============================================= -->
-<section id="page-title">
-
-  <div class="container clearfix">
-    <h1>Sign Up</h1>
-  </div>
-
-</section><!-- #page-title end -->
-
-<!-- Content
-============================================= -->
-<section id="content">
-
-  <div class="content-wrap">
-
-    <div class="container clearfix">
-
-      <div class="divcenter nobottommargin clearfix" style="max-width: 550px;">
-
-        <% if @user.errors.any? %>
-          <div class="style-msg2 errormsg">
-            <div class="msgtitle">Oops! There's an error upon submitting.</div>
-            <div class="sb-msg">
-              <ul>
-                <% for message in @user.errors.full_messages %>
-                  <li><%= message %></li>
-                <% end %>
-              </ul>
-            </div>
-          </div>
-        <% end %>
-
-        <div class="acc_content clearfix">
-          <%= form_with(model: @user, html: {id: 'register-form', class: 'nobottommargin', name: 'register-form'}, local: true) do |f| %>
-
-            <div class="col_full">
-              <label for="email_address">Email Address:</label>
-              <%= f.text_field :email_address, class: 'form-control required', id: 'email_address', required: 'required' %>
-            </div>
-
-            <input type="hidden" name="user[referer]" value="<%= cookies[:referer] %>" />
-
-            <div class="col_full nobottommargin">
-              <button class="btn btn-primary nomargin" id="register-form-submit" name="register-form-submit" value="register">Get Started</button>
-            </div>
-
+<div class="py-md-5 form-container-center">
+  <h1 class="h3 mb-3 font-weight-normal text-center">Sign Up</h1>
+  <% if @user.errors.any? %>
+    <div class="alert alert-danger" role="alert">
+      <h6 class="alert-heading">Oops! There's an error upon submitting.</h6>
+      <div class="sb-msg">
+        <ul>
+          <% for message in @user.errors.full_messages %>
+            <li><%= message %></li>
           <% end %>
-        </div>
+        </ul>
       </div>
-
     </div>
+  <% end %>
 
-  </div>
 
-</section><!-- #content end -->
+  <%= form_with(model: @user, html: {id: 'register-form', class: 'nobottommargin', name: 'register-form'}, local: true) do |f| %>
+    <label for="inputEmail" class="sr-only">Email address</label>
+    <%= f.text_field :email_address, class: 'form-control required mb-3', id: 'inputEmail', placeholder: 'Email Address', required: 'required' %>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Get Started</button>
+    <input type="hidden" name="user[referer]" value="<%= cookies[:referer] %>" />
+  <% end %>
+</div>
+
 
 

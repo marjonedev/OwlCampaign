@@ -3,6 +3,7 @@ class SessionController < ApplicationController
 
   def new
     @redirect_to = params[:redirect_to]
+    @user = User.new
   end
 
   def create
@@ -11,7 +12,7 @@ class SessionController < ApplicationController
       session[:user_id] = @attempted_user.id
       redirect_to redirect_url, id: @attempted_user.id
     else
-      flash.now[:errormsg] = "Username or password is invalid."
+      flash.now[:danger] = "Username or password is invalid."
       render "new"
     end
   end

@@ -1,5 +1,6 @@
 class TemplatesController < ApplicationController
   before_action :set_template, only: [:show, :edit, :update, :destroy]
+  before_action :require_login
 
   # GET /templates
   # GET /templates.json
