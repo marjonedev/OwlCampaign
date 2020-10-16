@@ -1,9 +1,11 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
 
-<h1>Campaigns</h1>
+  <p id="notice"><%= notice %></p>
 
-<table>
-  <thead>
+  <h1>Campaigns</h1>
+
+  <table>
+    <thead>
     <tr>
       <th>Emaillist</th>
       <th>Template</th>
@@ -14,9 +16,9 @@
       <th>Time send</th>
       <th colspan="3"></th>
     </tr>
-  </thead>
+    </thead>
 
-  <tbody>
+    <tbody>
     <% @campaigns.each do |campaign| %>
       <tr>
         <td><%= campaign.emaillist_id %></td>
@@ -31,9 +33,11 @@
         <td><%= link_to 'Destroy', campaign, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
 
-<br>
+  <br>
 
-<%= link_to 'New Campaign', new_campaign_path %>
+  <%= link_to 'New Campaign', new_campaign_path %>
+</div>
+
