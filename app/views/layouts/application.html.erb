@@ -22,6 +22,8 @@
       <% if logged_in? %>
         <a class="p-2 text-dark" href="/dashboard">Dashboard</a>
         <a class="p-2 text-dark" href="<%= campaigns_url %>">Campaign</a>
+        <a class="p-2 text-dark" href="<%= templates_url %>">Templates</a>
+        <a class="p-2 text-dark" href="<%= contacts_url %>">Contacts</a>
         <a class="p-2 text-dark" href="<%= user_url(current_user) %>">Account</a>
         <a class="p-2 text-dark" href="/logout">Log Out</a>
       <% else %>

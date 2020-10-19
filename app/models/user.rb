@@ -1,9 +1,9 @@
 class User < ApplicationRecord
   attr_accessor :password
 
-  has_many :emaillist
-  has_many :contact
-  has_many :template
+  has_many :emaillists
+  has_many :contacts
+  has_many :templates
 
   validates_presence_of :username
   validates_confirmation_of :password
