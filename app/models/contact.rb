@@ -1,6 +1,6 @@
 class Contact < ApplicationRecord
   belongs_to :user
-  belongs_to :emaillist
+  belongs_to :emaillist, optional: true
   has_many :emailsends
 
   validates_presence_of :email

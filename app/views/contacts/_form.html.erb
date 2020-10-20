@@ -1,7 +1,7 @@
 <%= form_with(model: contact, local: true) do |form| %>
   <% if contact.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
+    <div id="error_explanation" class="alert alert-danger" role="alert">
+      <h6><%= pluralize(contact.errors.count, "error") %> prohibited this contact from being saved:</h6>
 
       <ul>
         <% contact.errors.full_messages.each do |message| %>
@@ -11,33 +11,35 @@
     </div>
   <% end %>
 
-
   <div class="form-group">
-    <label for="inputEmail">Email</label>
-    <input type="email" class="form-control" id="inputEmail" required="required">
+    <%= form.label :email %>
+    <%= form.email_field :email, class: "form-control", required: "required" %>
   </div>
   <div class="form-row">
     <div class="form-group col-md-6">
-      <label for="inputFname">First Name</label>
-      <input type="text" class="form-control" id="inputFname">
+      <%= form.label :first_name, class: 'text-capitalize' %>
+      <%= form.text_field :first_name, class: "form-control" %>
     </div>
     <div class="form-group col-md-6">
-      <label for="inputLname">Last Name</label>
-      <input type="text" class="form-control" id="inputLname">
+      <%= form.label :last_name, class: 'text-capitalize' %>
+      <%= form.text_field :last_name, class: "form-control" %>
     </div>
   </div>
   <div class="form-row">
     <div class="form-group col-md-8">
-      <label for="inputAddress">Address</label>
-      <input type="text" class="form-control" id="inputAddress">
+      <%= form.label :address, class: 'text-capitalize' %>
+      <%= form.text_field :address, class: "form-control" %>
     </div>
     <div class="form-group col-md-4">
-      <label for="inputPhone">Phone</label>
-      <input type="text" class="form-control" id="inputPhone">
+      <%= form.label :phone, class: 'text-capitalize' %>
+      <%= form.text_field :phone, class: "form-control" %>
     </div>
   </div>
-
-  <div class="actions">
-    <%= form.submit %>
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <button type="submit" class="btn btn-primary pl-4 pr-4 mr-2"> Save </button> <%= link_to "Cancel", contacts_url, :class => 'btn btn-light' %>
+    </div>
   </div>
 <% end %>
+
+
