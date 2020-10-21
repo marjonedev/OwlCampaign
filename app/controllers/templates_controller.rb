@@ -5,7 +5,7 @@ class TemplatesController < ApplicationController
   # GET /templates
   # GET /templates.json
   def index
-    @templates = Template.all
+    @templates = current_user.templates.all
   end
 
   # GET /templates/1
@@ -15,7 +15,7 @@ class TemplatesController < ApplicationController
 
   # GET /templates/new
   def new
-    @template = Template.new
+    @template = current_user.templates.new
   end
 
   # GET /templates/1/edit
@@ -25,7 +25,7 @@ class TemplatesController < ApplicationController
   # POST /templates
   # POST /templates.json
   def create
-    @template = Template.new(template_params)
+    @template = current_user.templates.new(template_params)
 
     respond_to do |format|
       if @template.save
@@ -65,11 +65,11 @@ class TemplatesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_template
-      @template = Template.find(params[:id])
+      @template = current_user.templates.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def template_params
-      params.require(:template).permit(:user_id, :content, :name)
+      params.require(:template).permit(:content, :name)
     end
 end

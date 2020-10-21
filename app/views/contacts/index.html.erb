@@ -16,7 +16,7 @@
         <th>Address</th>
         <th>Phone</th>
         <th>Subscribed</th>
-        <th colspan="2"></th>
+        <th colspan="2">Actions</th>
       </tr>
       </thead>
 
@@ -29,8 +29,16 @@
           <td><%= contact.address %></td>
           <td><%= contact.phone %></td>
           <td><%= !!(contact.subscribed) ? 'Yes' : 'No' %></td>
-          <td><%= link_to 'Edit', edit_contact_path(contact) %></td>
-          <td><%= link_to 'Remove', contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td style="width: 32px;">
+            <%= link_to edit_contact_path(contact), class: 'btn btn-warning btn-sm' do %>
+              <i class="fa fa-edit" aria-hidden="true"></i>
+            <% end %>
+          </td>
+          <td style="width: 32px;">
+            <%= link_to contact, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-dark btn-sm' do %>
+            <i class="fa fa-trash" aria-hidden="true"></i>
+            <% end %>
+          </td>
         </tr>
       <% end %>
       </tbody>

@@ -1,31 +1,31 @@
-<p id="notice"><%= notice %></p>
+<div class="mt-5 my-1 p-3 bg-white rounded shadow-sm">
+  <% if notice %>
+    <div class="alert alert-secondary"><%= notice %></div>
+  <% end %>
+  <div class="d-flex justify-content-between border-bottom border-gray pb-2 mb-0">
+    <h5>Templates</h5>
+    <%= link_to 'Create New', new_template_url, class: 'btn btn-primary btn-sm' %>
+  </div>
+  <div class="pt-3">
+    <table class="table table-sm table-borderless table-hover">
+      <tbody>
+      <% @templates.each do |template| %>
+        <tr>
+          <td><%= template.name %></td>
+          <td style="width: 32px;">
+            <%= link_to template_url(template), class: 'btn btn-info btn-sm' do %>
+              <i class="fa fa-eye" aria-hidden="true"></i>
+            <% end %>
+          </td>
+          <td style="width: 32px;">
+            <%= link_to edit_template_url(template), class: 'btn btn-warning btn-sm' do %>
+              <i class="fa fa-edit" aria-hidden="true"></i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 
-<h1>Templates</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Content</th>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @templates.each do |template| %>
-      <tr>
-        <td><%= template.user_id %></td>
-        <td><%= template.content %></td>
-        <td><%= template.name %></td>
-        <td><%= link_to 'Show', template %></td>
-        <td><%= link_to 'Edit', edit_template_path(template) %></td>
-        <td><%= link_to 'Destroy', template, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Template', new_template_path %>
