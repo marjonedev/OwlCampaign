@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_26_180731) do
+ActiveRecord::Schema.define(version: 2020_10_27_173037) do
 
   create_table "campaigns", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.integer "emaillist_id"
@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(version: 2020_10_26_180731) do
     t.string "email_address"
     t.string "encrypted_password"
     t.string "salt"
-    t.boolean "admin"
+    t.boolean "admin", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

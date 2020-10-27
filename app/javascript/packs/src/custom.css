@@ -19,3 +19,11 @@ form.login-form #inputPassword{
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
+
+textarea#template_content{
+    min-height: 300px;
+}
+
+.shorttag-sm{
+    font-style: italic;
+}

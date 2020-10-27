@@ -12,6 +12,7 @@ class SessionController < ApplicationController
       session[:user_id] = @attempted_user.id
       redirect_to redirect_url, id: @attempted_user.id
     else
+      @user = User.new
       flash.now[:danger] = "Username or password is invalid."
       render "new"
     end
