@@ -20,6 +20,14 @@
     <%= form.text_area :content, class: "form-control", id: "template_content" %>
     <small class="shorttag-sm text-muted">use <strong>%%content%%</strong> short tag for the placement of the email content</small>
   </div>
+  <% if is_admin? %>
+  <div class="form-group">
+    <%= form.check_box :visible, { checked: @template.visible }, 1, 0 %>
+    <label class="form-check-label" for="defaultCheck1">
+      Set Visible to Users
+    </label>
+  </div>
+  <% end %>
   <div class="form-group row">
     <div class="col-sm-10">
       <button type="submit" class="btn btn-primary pl-4 pr-4 mr-2"> Save </button> <%= link_to "Cancel", templates_url, :class => 'btn btn-light' %>

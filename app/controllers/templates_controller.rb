@@ -5,7 +5,11 @@ class TemplatesController < ApplicationController
   # GET /templates
   # GET /templates.json
   def index
-    @templates = current_user.templates.all
+    if is_admin?
+      @templates = current_user.templates.all
+    else
+      @templates = Template.where(admin_default: true, visible: true).or(current_user.templates.all)
+    end
   end
 
   # GET /templates/1
@@ -71,6 +75,6 @@ class TemplatesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def template_params
-      params.require(:template).permit(:content, :name)
+      params.require(:template).permit(:content, :name, :visible)
     end
 end

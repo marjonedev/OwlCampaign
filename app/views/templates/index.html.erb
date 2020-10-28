@@ -9,6 +9,7 @@
   <div class="pt-3">
     <table class="table table-sm table-borderless table-hover">
       <tbody>
+      <%#=  Template.where(admin_default: true, visible: true).or(current_user.templates.all) %>
       <% @templates.each do |template| %>
         <tr>
           <td><%= template.name %></td>
