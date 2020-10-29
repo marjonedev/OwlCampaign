@@ -1,0 +1,3 @@
+$('#templateShowModal').find('#templateModalName').text("<%= @template.name %>");
+$('#templateShowModal').find('#templateModalFrame').attr("src", "<%= preview_template_url(@template) %>");
+$('#templateShowModal').modal('show');

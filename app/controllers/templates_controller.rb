@@ -1,5 +1,5 @@
 class TemplatesController < ApplicationController
-  before_action :set_template, only: [:show, :edit, :update, :destroy]
+  before_action :set_template, only: [:edit, :update, :destroy]
   before_action :require_login
 
   # GET /templates
@@ -8,13 +8,18 @@ class TemplatesController < ApplicationController
     if is_admin?
       @templates = current_user.templates.all
     else
-      @templates = Template.where(admin_default: true, visible: true).or(current_user.templates.all)
+      @templates = Template.where(admin_default: true, visible: true).or(current_user.templates.all).order(admin_default: :desc)
     end
   end
 
   # GET /templates/1
   # GET /templates/1.json
   def show
+    @template = Template.find(params[:id])
+
+    unless @template.admin_default
+      @template = current_user.templates.find(params[:id])
+    end
   end
 
   # GET /templates/new
@@ -34,7 +39,7 @@ class TemplatesController < ApplicationController
 
     respond_to do |format|
       if @template.save
-        format.html { redirect_to @template, notice: 'Template was successfully created.' }
+        format.html { redirect_to templates_url, notice: 'Template was successfully created.' }
         format.json { render :show, status: :created, location: @template }
       else
         format.html { render :new }
@@ -48,7 +53,7 @@ class TemplatesController < ApplicationController
   def update
     respond_to do |format|
       if @template.update(template_params)
-        format.html { redirect_to @template, notice: 'Template was successfully updated.' }
+        format.html { redirect_to templates_url, notice: 'Template was successfully updated.' }
         format.json { render :show, status: :ok, location: @template }
       else
         format.html { render :edit }
@@ -65,6 +70,31 @@ class TemplatesController < ApplicationController
       format.html { redirect_to templates_url, notice: 'Template was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def duplicate
+    @template = Template.find(params[:id])
+    @template = Template.duplicate(@template, current_user)
+
+    respond_to do |format|
+      if @template.save
+        format.html { redirect_to edit_template_url(@template), notice: 'Template was successfully copied.' }
+        format.json { render :edit, status: :created, location: @template }
+      else
+        format.html { redirect_to templates_url, alert: "Error copying the template" }
+        format.json { render json: @template.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def preview
+    @template = Template.find(params[:id])
+
+    unless @template.admin_default
+      @template = current_user.templates.find(params[:id])
+    end
+
+    render :layout => false
   end
 
   private

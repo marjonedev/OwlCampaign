@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
 
-  resources :templates
+  resources :templates do
+    member do
+      post :duplicate
+      get :preview
+    end
+  end
+
   resources :campaigns
   resources :contacts
   resources :users
