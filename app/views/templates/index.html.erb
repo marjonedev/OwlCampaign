@@ -18,15 +18,22 @@
             <% end %>
           </td>
           <td style="width: 32px;">
-            <% if template.admin_default %>
-              <%= link_to '#', class: 'btn btn-warning btn-sm disabled' do %>
-                <i class="fa fa-edit" aria-hidden="true"></i>
-              <% end %>
-            <% else %>
+            <% if is_admin? %>
               <%= link_to edit_template_url(template), class: 'btn btn-warning btn-sm', title: "Edit" do %>
                 <i class="fa fa-edit" aria-hidden="true"></i>
               <% end %>
+            <% else %>
+              <% if template.admin_default %>
+                <%= link_to '#', class: 'btn btn-warning btn-sm disabled' do %>
+                  <i class="fa fa-edit" aria-hidden="true"></i>
+                <% end %>
+              <% else %>
+                <%= link_to edit_template_url(template), class: 'btn btn-warning btn-sm', title: "Edit" do %>
+                  <i class="fa fa-edit" aria-hidden="true"></i>
+                <% end %>
+              <% end %>
             <% end %>
+
           </td>
           <td style="width: 32px;">
             <%= link_to duplicate_template_url(template), class: 'btn btn-secondary btn-sm', title: "Duplicate", method: :post do %>

@@ -7,6 +7,7 @@ class Template < ApplicationRecord
     tmpl = template.dup
     tmpl.name = template.name + "(1)"
     tmpl.admin_default = false
+    tmpl.visible = true
     tmpl.user = user
 
     tmpl

@@ -100,7 +100,11 @@ class TemplatesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_template
-      @template = current_user.templates.find(params[:id])
+      if is_admin?
+        @template = Template.find(params[:id])
+      else
+        @template = current_user.templates.find(params[:id])
+      end
     end
 
     # Only allow a list of trusted parameters through.
