@@ -18,24 +18,32 @@
 <body class="bg-light">
   <div class="d-flex flex-column flex-md-row align-items-center px-md-4 p-3 mb-3 nav-scroller bg-white shadow-sm box-shadow">
     <h5 class="my-0 mr-md-auto font-weight-normal">OwlCampaign</h5>
-    <nav class="my-2 my-md-0 mr-md-3">
+    <ul class="nav my-2 my-md-0 mr-md-3">
       <% if logged_in? %>
-        <a class="p-2 text-dark" href="/dashboard">Dashboard</a>
-        <a class="p-2 text-dark" href="<%= campaigns_url %>">Campaign</a>
-        <a class="p-2 text-dark" href="<%= templates_url %>">Templates</a>
-        <a class="p-2 text-dark" href="<%= contacts_url %>">Contacts</a>
-        <a class="p-2 text-dark" href="<%= user_url(current_user) %>">Account</a>
-        <a class="p-2 text-dark" href="/logout">Log Out</a>
+        <li class="nav-item">
+          <a class="nav-link p-2 text-dark" href="/dashboard">Dashboard</a>
+        </li>
+        <li class="nav-item"><a class="nav-link p-2 text-dark" href="<%= campaigns_url %>">Campaign</a></li>
+        <li class="nav-item"><a class="nav-link p-2 text-dark" href="<%= templates_url %>">Templates</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle p-2 text-dark" href="#" id="subscribersNavLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Subscribers</a>
+          <div class="dropdown-menu" aria-labelledby="subscribersNavLink">
+            <a class="dropdown-item" href="<%= contacts_url %>">Contacts</a>
+            <a class="dropdown-item" href="<%= emaillists_url %>">Email List</a>
+          </div>
+        </li>
+        <li class="nav-item"><a class="nav-link p-2 text-dark" href="<%= user_url(current_user) %>">Account</a></li>
+        <li class="nav-item"><a class="nav-link p-2 text-dark" href="/logout">Log Out</a></li>
       <% else %>
-        <a class="p-2 text-dark" href="/">Home</a>
-        <a class="p-2 text-dark" href="#">Features</a>
-        <a class="p-2 text-dark" href="#">Pricing</a>
-        <a class="p-2 text-dark" href="/login">Log In</a>
+        <li class="nav-item"><a class="nav-link p-2 text-dark" href="/">Home</a></li>
+        <li class="nav-item"><a class="nav-link p-2 text-dark" href="#">Features</a></li>
+        <li class="nav-item"><a class="nav-link p-2 text-dark" href="#">Pricing</a></li>
+        <li class="nav-item"><a class="nav-link p-2 text-dark" href="/login">Log In</a></li>
       <% end %>
-    </nav>
-    <% unless current_page?('/signup') or logged_in? %>
-      <a class="btn btn-outline-primary" href="/signup">Sign up</a>
-    <% end %>
+      <% unless current_page?('/signup') or logged_in? %>
+        <li class="nav-item"><a class="nav-link btn btn-outline-primary ml-2" href="/signup">Sign up</a></li>
+      <% end %>
+    </ul>
   </div>
 
   <main role="main" class="container">

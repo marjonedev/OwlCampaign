@@ -1,6 +1,55 @@
-<div class="container">
+<div class="mt-5 my-1 p-3 bg-white rounded shadow-sm">
+  <% if notice %>
+    <div class="alert alert-secondary"><%= notice %></div>
+  <% end %>
+  <div class="d-flex justify-content-between border-bottom border-gray pb-2 mb-0">
+    <h5>Campaigns</h5>
+    <%= link_to 'Create New', new_campaign_url, class: 'btn btn-primary btn-sm' %>
+  </div>
+  <div class="pt-3">
+    <table class="table table-sm table-borderless table-hover">
+      <tbody>
+      <% @campaigns.each do |campaign| %>
+        <!--<tr>
+          <td><%#= campaign.name %></td>
+          <td style="width: 32px;">
+            <%#= link_to template_url(template), class: 'btn btn-info btn-sm', title: "Preview", remote: true, data: {name: template.name} do %>
+              <i class="fa fa-eye" aria-hidden="true"></i>
+            <%# end %>
+          </td>
+          <td style="width: 32px;">
+            <%# if is_admin? %>
+              <%#= link_to edit_template_url(template), class: 'btn btn-warning btn-sm', title: "Edit" do %>
+                <i class="fa fa-edit" aria-hidden="true"></i>
+              <%# end %>
+            <%# else %>
+              <%# if template.admin_default %>
+                <%#= link_to '#', class: 'btn btn-warning btn-sm disabled' do %>
+                  <i class="fa fa-edit" aria-hidden="true"></i>
+                <%# end %>
+              <%# else %>
+                <%#= link_to edit_template_url(template), class: 'btn btn-warning btn-sm', title: "Edit" do %>
+                  <i class="fa fa-edit" aria-hidden="true"></i>
+                <%# end %>
+              <%# end %>
+            <%# end %>
 
-  <p id="notice"><%= notice %></p>
+          </td>
+          <td style="width: 32px;">
+            <%#= link_to duplicate_template_url(template), class: 'btn btn-secondary btn-sm', title: "Duplicate", method: :post do %>
+              <i class="fa fa-copy" aria-hidden="true"></i>
+            <%# end %>
+          </td>
+        </tr>-->
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!--<div class="container">
+
+  <p id="notice"><%#= notice %></p>
 
   <h1>Campaigns</h1>
 
@@ -19,25 +68,25 @@
     </thead>
 
     <tbody>
-    <% @campaigns.each do |campaign| %>
+    <%# @campaigns.each do |campaign| %>
       <tr>
-        <td><%= campaign.emaillist_id %></td>
-        <td><%= campaign.template_id %></td>
-        <td><%= campaign.from %></td>
-        <td><%= campaign.subject %></td>
-        <td><%= campaign.content %></td>
-        <td><%= campaign.date_send %></td>
-        <td><%= campaign.time_send %></td>
-        <td><%= link_to 'Show', campaign %></td>
-        <td><%= link_to 'Edit', edit_campaign_path(campaign) %></td>
-        <td><%= link_to 'Destroy', campaign, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%#= campaign.emaillist_id %></td>
+        <td><%#= campaign.template_id %></td>
+        <td><%#= campaign.from %></td>
+        <td><%#= campaign.subject %></td>
+        <td><%#= campaign.content %></td>
+        <td><%#= campaign.date_send %></td>
+        <td><%#= campaign.time_send %></td>
+        <td><%#= link_to 'Show', campaign %></td>
+        <td><%#= link_to 'Edit', edit_campaign_path(campaign) %></td>
+        <td><%#= link_to 'Destroy', campaign, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
-    <% end %>
+    <%# end %>
     </tbody>
   </table>
 
   <br>
 
-  <%= link_to 'New Campaign', new_campaign_path %>
-</div>
+  <%#= link_to 'New Campaign', new_campaign_path %>
+</div>-->
 

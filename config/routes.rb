@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   end
 
   resources :campaigns
+  resources :emaillists
   resources :contacts
   resources :users
 

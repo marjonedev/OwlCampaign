@@ -1,0 +1,32 @@
+<div class="mt-5 my-1 p-3 bg-white rounded shadow-sm">
+  <% if notice %>
+    <div class="alert alert-secondary"><%= notice %></div>
+  <% end %>
+  <div class="d-flex justify-content-between border-bottom border-gray pb-2 mb-0">
+    <h5>Email Lists</h5>
+    <%= link_to 'Create New', new_emaillist_url, class: 'btn btn-primary btn-sm' %>
+  </div>
+  <div class="pt-3">
+    <table class="table table-sm">
+      <thead>
+      <tr>
+        <th>Email</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Address</th>
+        <th>Phone</th>
+        <th>Subscribed</th>
+        <th colspan="2">Actions</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @emaillists.each do |list| %>
+        <tr>
+
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
