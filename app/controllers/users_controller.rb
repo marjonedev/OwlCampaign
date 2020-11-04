@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :require_admin, only: [:index]
-  before_action :require_login, only: [:index, :edit, :create, :update, :destroy]
+  before_action :require_login, only: [:show, :index, :edit, :update, :destroy]
 
   # GET /users
   # GET /users.json
@@ -30,6 +29,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        session[:user_id] = @user.id # Make sure the user is logged in after signing in!
+        session[:new_sign_up] = true
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else

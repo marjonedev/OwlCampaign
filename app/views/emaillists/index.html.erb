@@ -7,26 +7,15 @@
     <%= link_to 'Create New', new_emaillist_url, class: 'btn btn-primary btn-sm' %>
   </div>
   <div class="pt-3">
-    <table class="table table-sm">
-      <thead>
-      <tr>
-        <th>Email</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Address</th>
-        <th>Phone</th>
-        <th>Subscribed</th>
-        <th colspan="2">Actions</th>
-      </tr>
-      </thead>
-
-      <tbody>
+    <div class="list-group">
       <% @emaillists.each do |list| %>
-        <tr>
-
-        </tr>
+        <a href="<%= emaillist_url(list) %>" class="list-group-item list-group-item-action  d-flex justify-content-between align-items-center">
+          <%= list.name %>
+          <% if list.default %>
+            <span class="badge badge-success badge-pill">default</span>
+          <% end %>
+        </a>
       <% end %>
-      </tbody>
-    </table>
+    </div>
   </div>
 </div>

@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :logged_in?
   helper_method :is_admin?
+  before_action :set_referer_cookies
 
   def current_user
     if session[:user_id]

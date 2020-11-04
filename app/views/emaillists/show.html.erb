@@ -1,0 +1,13 @@
+<div class="mt-5 my-1 p-3 bg-white rounded shadow-sm">
+  <% if notice %>
+    <div class="alert alert-secondary"><%= notice %></div>
+  <% end %>
+  <div class="d-flex justify-content-between border-bottom border-gray pb-2 mb-0">
+    <h5><%= @emaillist.name %></h5>
+    <%= link_to edit_emaillist_url(@emaillist), class: "text-muted", remote: true do %>
+      <i class="fa fa-edit"></i>
+    <% end %>
+  </div>
+  <div class="pt-3">
+  </div>
+</div>

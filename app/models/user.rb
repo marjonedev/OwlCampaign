@@ -19,6 +19,7 @@ class User < ApplicationRecord
   before_save :encrypt_password
   before_validation :set_initial_content, on: [:create]
   before_validation :lowercase_username
+  after_create :create_default_emaillist
 
   def set_initial_content
     self.password = self.email_address
@@ -26,6 +27,10 @@ class User < ApplicationRecord
     # set default subscription_id
     # s = Subscription.find_by(name: "Entrepreneur").id
     # self.subscription_id = s
+  end
+
+  def create_default_emaillist
+    self.emaillists.create(name: "Default", default: true)
   end
 
   def lowercase_username

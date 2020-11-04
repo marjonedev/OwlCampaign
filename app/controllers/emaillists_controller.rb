@@ -64,7 +64,7 @@ class EmaillistsController < ApplicationController
 
   private
   # Use callbacks to share common setup or constraints between actions.
-  def set_contact
+  def set_emaillist
     @emaillist = current_user.emaillists.find(params[:id])
   end
 
