@@ -2,47 +2,50 @@ class EmaillistsController < ApplicationController
   before_action :set_emaillist, only: [:show, :edit, :update, :destroy]
   before_action :require_login
 
-  # GET /contacts
-  # GET /contacts.json
+  # GET /emaillists
+  # GET /emaillists.json
   def index
     @emaillists = current_user.emaillists
   end
 
-  # GET /contacts/1
-  # GET /contacts/1.json
+  # GET /emaillists/1
+  # GET /emaillists/1.json
   def show
+    @contacts = @emaillist.contacts
   end
 
-  # GET /contacts/new
+  # GET /emaillists/new
   def new
     @emaillist = current_user.emaillists.new
   end
 
-  # GET /contacts/1/edit
+  # GET /emaillists/1/edit
   def edit
   end
 
-  # POST /contacts
-  # POST /contacts.json
+  # POST /emaillists
+  # POST /emaillists.json
   def create
     @emaillist = current_user.emaillists.new(emaillist_params)
 
     respond_to do |format|
       if @emaillist.save
+        format.js { redirect_to emaillists_url }
         format.html { redirect_to @emaillist, notice: 'Email List was successfully created.' }
         format.json { render :show, status: :created, location: @emaillist }
       else
+        format.js {}
         format.html { render :new }
         format.json { render json: @emaillist.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PATCH/PUT /contacts/1
-  # PATCH/PUT /contacts/1.json
+  # PATCH/PUT /emaillists/1
+  # PATCH/PUT /emaillists/1.json
   def update
     respond_to do |format|
-      if @emaillist.update(contact_params)
+      if @emaillist.update(emaillist_params)
         format.html { redirect_to @emaillist, notice: 'Email List was successfully updated.' }
         format.json { render :show, status: :ok, location: @emaillist }
       else
@@ -52,12 +55,12 @@ class EmaillistsController < ApplicationController
     end
   end
 
-  # DELETE /contacts/1
-  # DELETE /contacts/1.json
+  # DELETE /emaillists/1
+  # DELETE /emaillists/1.json
   def destroy
     @emaillist.destroy
     respond_to do |format|
-      format.html { redirect_to contacts_url, notice: 'Email List was successfully destroyed.' }
+      format.html { redirect_to emaillists_url, notice: 'Email List was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -70,7 +73,7 @@ class EmaillistsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def emaillist_params
-    params.require(:contact)
+    params.require(:emaillist)
         .permit(:name)
   end
 end

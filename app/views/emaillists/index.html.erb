@@ -4,18 +4,44 @@
   <% end %>
   <div class="d-flex justify-content-between border-bottom border-gray pb-2 mb-0">
     <h5>Email Lists</h5>
-    <%= link_to 'Create New', new_emaillist_url, class: 'btn btn-primary btn-sm' %>
+    <%= link_to 'Create New', new_emaillist_url, class: 'btn btn-primary btn-sm', remote: true %>
   </div>
   <div class="pt-3">
     <div class="list-group">
       <% @emaillists.each do |list| %>
-        <a href="<%= emaillist_url(list) %>" class="list-group-item list-group-item-action  d-flex justify-content-between align-items-center">
-          <%= list.name %>
+        <a href="<%= emaillist_url(list) %>" class="list-group-item list-group-item-action  d-flex align-items-center">
+          <spa class="flex-grow-1"><%= list.name %></spa>
           <% if list.default %>
-            <span class="badge badge-success badge-pill">default</span>
+            <span class="badge badge-success badge-pill mr-1">default</span>
           <% end %>
+          <span class="badge badge-secondary badge-pill"><%= list.contacts.count %></span>
         </a>
       <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="newEmailListModal" tabindex="-1" aria-labelledby="newEmailListModalLabel" data-backdrop="static" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <%= form_with model: Emaillist.new, url: emaillists_url, class: 'nobottommargin login-form', data: {remote: true} do |f| %>
+      <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">New Email List</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+              <%= f.label :name, class: 'text-capitalize' %>
+              <%= f.text_field :name, class: 'form-control' %>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+        <% end %>
     </div>
   </div>
 </div>
