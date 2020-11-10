@@ -6,7 +6,7 @@ class Contact < ApplicationRecord
   validates_presence_of :email
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
 
-  after_create :set_emaillist
+  # after_create :set_emaillist
 
   private
   def set_emaillist

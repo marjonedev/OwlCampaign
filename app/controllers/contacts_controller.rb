@@ -5,7 +5,7 @@ class ContactsController < ApplicationController
   # GET /contacts
   # GET /contacts.json
   def index
-    @contacts = current_user.contacts
+    @contacts = current_user.contacts.where(archived: false)
   end
 
   # GET /contacts/1
@@ -29,7 +29,7 @@ class ContactsController < ApplicationController
 
     respond_to do |format|
       if @contact.save
-        format.html { redirect_to @contact, notice: 'Contact was successfully created.' }
+        format.html { redirect_to contacts_url, notice: 'Contact was successfully created.' }
         format.json { render :show, status: :created, location: @contact }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class ContactsController < ApplicationController
   def update
     respond_to do |format|
       if @contact.update(contact_params)
-        format.html { redirect_to @contact, notice: 'Contact was successfully updated.' }
+        format.html { redirect_to contacts_url, notice: 'Contact was successfully updated.' }
         format.json { render :show, status: :ok, location: @contact }
       else
         format.html { render :edit }
@@ -55,7 +55,7 @@ class ContactsController < ApplicationController
   # DELETE /contacts/1
   # DELETE /contacts/1.json
   def destroy
-    @contact.destroy
+    @contact.update_column('archived', 1)
     respond_to do |format|
       format.html { redirect_to contacts_url, notice: 'Contact was successfully destroyed.' }
       format.json { head :no_content }
@@ -71,6 +71,6 @@ class ContactsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def contact_params
       params.require(:contact)
-      .permit(:email, :first_name, :last_name, :address, :phone)
+      .permit(:email, :first_name, :last_name, :address, :phone, :emaillist_id)
     end
 end
