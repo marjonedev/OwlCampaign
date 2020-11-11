@@ -1,5 +1,5 @@
 class EmaillistsController < ApplicationController
-  before_action :set_emaillist, only: [:show, :edit, :update, :destroy]
+  before_action :set_emaillist, only: [:show, :edit, :update, :destroy, :add_contact, :set_default]
   before_action :require_login
 
   # GET /emaillists
@@ -60,8 +60,28 @@ class EmaillistsController < ApplicationController
   def destroy
     @emaillist.destroy
     respond_to do |format|
-      format.html { redirect_to emaillists_url, notice: 'Email List was successfully destroyed.' }
-      format.json { head :no_content }
+      if @emaillist.default
+        @contacts = @emaillist.contacts
+        format.html { render :show }
+      else
+        format.html { redirect_to emaillists_url }
+      end
+      format.json { render json: @emaillist.errors, status: :unprocessable_entity }
+    end
+  end
+
+  def add_contact
+    respond_to do |format|
+      format.js {}
+    end
+  end
+
+  def set_default
+
+    @emaillist.toggle_default
+
+    respond_to do |format|
+      format.js { redirect_to @emaillist, notice: "Email list was set to default" }
     end
   end
 

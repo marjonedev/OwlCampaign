@@ -27,3 +27,16 @@ textarea#template_content{
 .shorttag-sm{
     font-style: italic;
 }
+
+.dropdown.right_menu .dropdown-toggle::after{
+    margin: 0;
+    content: none;
+    padding: 0;
+    height: 0;
+    width: 0;
+}
+
+.select2-container .selection .select2-selection{
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+}

@@ -8,7 +8,12 @@ Rails.application.routes.draw do
   end
 
   resources :campaigns
-  resources :emaillists
+  resources :emaillists do
+    member do
+      get :add_contact
+      put :set_default
+    end
+  end
   resources :contacts
   resources :users
 

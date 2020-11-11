@@ -2,11 +2,39 @@
   <% if notice %>
     <div class="alert alert-secondary"><%= notice %></div>
   <% end %>
+  <% if @emaillist.errors.any? %>
+    <div class="alert alert-danger" role="alert">
+      <% @emaillist.errors.full_messages.each do |message| %>
+        <p class="mb-0"><%= message %></p>
+      <% end %>
+    </div>
+  <% end %>
   <div class="d-flex justify-content-between border-bottom border-gray pb-2 mb-0">
     <h5><%= @emaillist.name %></h5>
-    <%= link_to edit_emaillist_url(@emaillist), class: "text-muted", remote: true do %>
-      <i class="fa fa-edit"></i>
-    <% end %>
+    <div class="dropdown right_menu">
+      <button class="btn btn-light dropdown-toggle btn-sm" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+      </button>
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
+        <%= link_to edit_emaillist_url(@emaillist), class: "dropdown-item", remote: true do %>
+          Edit name
+        <% end %>
+        <% unless @emaillist.default %>
+          <%= link_to set_default_emaillist_url, class: "dropdown-item", method: :put, remote: true do %>
+            Set as default
+          <% end %>
+        <% end %>
+        <%= link_to add_contact_emaillist_url, class: "dropdown-item", remote: true do %>
+          Add contact to list
+        <% end %>
+        <% unless @emaillist.default %>
+          <%= link_to @emaillist, class: "dropdown-item", method: :delete, data: {confirm: "Are you sure?"} do %>
+            Delete List
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
   </div>
   <div class="pt-3">
     <% @contacts.each do |contact| %>

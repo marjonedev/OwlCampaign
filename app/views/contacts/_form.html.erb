@@ -38,8 +38,9 @@
   <div class="form-row">
     <div class="form-group  col-md-3 col-sm-10">
       <%= form.label :emaillist_id, 'Email List', class: 'text-capitalize'  %>
-      <% emaillistDefault = contact.id ? contact.emaillist&.id : current_user.emaillists.where(default: true).first.id %>
-      <%= form.select :emaillist_id, options_for_select(current_user.emaillists.all.map{ |t| [t.name,t.id]}, emaillistDefault) , {include_blank: true, required: false, include_hidden: false}, class: 'form-control select2' %>
+      <% emaillistDefault = contact.id ? contact.emaillist&.id : current_user.emaillists.find_by(default: true)&.id %>
+
+      <%= form.select :emaillist_id, options_for_select(current_user.emaillists.all.map{ |t| [t.name,t.id]}, emaillistDefault.to_i) , {include_blank: true, required: false, include_hidden: false}, class: 'form-control select2' %>
     </div>
   </div>
   <div class="form-group row">
