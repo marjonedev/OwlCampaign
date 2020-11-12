@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     member do
       get :add_contact
       put :set_default
+      delete :remove_contact
     end
   end
   resources :contacts

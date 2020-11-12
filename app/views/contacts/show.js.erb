@@ -1,0 +1,9 @@
+$('body').find('.contact_show_modal').each((i, v)=>{ $(v).remove(); });
+$('body').append("<%= escape_javascript(render partial: "contacts/info_modal") %>");
+
+$('#contactEmail').text('<%= @contact.email %>');
+$('#contactName').text('<%= @contact.first_name + ' ' + @contact.last_name %>');
+$('#contactPhone').text('<%= @contact.phone %>');
+$('#contactAddress').text('<%= @contact.address %>');
+
+$('#contactShowModal').modal('show');

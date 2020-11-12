@@ -1,5 +1,5 @@
 class EmaillistsController < ApplicationController
-  before_action :set_emaillist, only: [:show, :edit, :update, :destroy, :add_contact, :set_default]
+  before_action :set_emaillist, only: [:show, :edit, :update, :destroy, :add_contact, :set_default, :remove_contact]
   before_action :require_login
 
   # GET /emaillists
@@ -11,7 +11,7 @@ class EmaillistsController < ApplicationController
   # GET /emaillists/1
   # GET /emaillists/1.json
   def show
-    @contacts = @emaillist.contacts
+    @contacts = @emaillist.contacts.where(archived: false)
   end
 
   # GET /emaillists/new
@@ -61,7 +61,7 @@ class EmaillistsController < ApplicationController
     @emaillist.destroy
     respond_to do |format|
       if @emaillist.default
-        @contacts = @emaillist.contacts
+        @contacts = @emaillist.contacts.where(archived: false)
         format.html { render :show }
       else
         format.html { redirect_to emaillists_url }
@@ -77,11 +77,22 @@ class EmaillistsController < ApplicationController
   end
 
   def set_default
-
     @emaillist.toggle_default
 
     respond_to do |format|
       format.js { redirect_to @emaillist, notice: "Email list was set to default" }
+    end
+  end
+
+  def remove_contact
+    @contact = nil
+    if params[:contact_id].present?
+      @contact = @emaillist.contacts.find(params[:contact_id])
+      @contact.remove_from_list()
+    end
+    respond_to do |format|
+      format.js { redirect_to @emaillist, notice: "Contact removed from list" }
+      # format.js { }
     end
   end
 

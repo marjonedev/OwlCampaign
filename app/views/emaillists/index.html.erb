@@ -15,7 +15,7 @@
           <% if list.default %>
             <span class="badge badge-success badge-pill mr-1">default</span>
           <% end %>
-          <span class="badge badge-secondary badge-pill"><%= list.contacts.count %></span>
+          <span class="badge badge-secondary badge-pill"><%= list.contacts.where(archived: false).count %></span>
         </a>
       <% end %>
     </div>

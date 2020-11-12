@@ -37,9 +37,32 @@
 
   </div>
   <div class="pt-3">
-    <% @contacts.each do |contact| %>
-      <%= contact.email %>
-    <% end %>
+    <table class="table table-sm">
+      <tr>
+        <th>Email</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th colspan="2">Actions</th>
+      </tr>
+      <% @contacts.each do |contact| %>
+        <tr>
+          <td><%= contact.email %></td>
+          <td><%= contact.first_name %></td>
+          <td><%= contact.last_name %></td>
+          <td style="width: 32px;">
+            <%= link_to contact, class: 'btn btn-info btn-sm', title: "View contact", remote: true do %>
+              <i class="fa fa-eye" aria-hidden="true"></i>
+            <% end %>
+          </td>
+          <td style="width: 32px;">
+            <%= link_to remove_contact_emaillist_url(@emaillist, contact_id: contact.id), method: :delete, class: 'btn btn-danger btn-sm', title: "Remove contact from list", remote: true do %>
+              <i class="fa fa-trash" aria-hidden="true"></i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+
   </div>
 </div>
 

@@ -15,7 +15,7 @@
         <th>Last Name</th>
         <th>Subscribed</th>
         <th>Email List</th>
-        <th colspan="2">Actions</th>
+        <th colspan="3">Actions</th>
       </tr>
       </thead>
 
@@ -27,6 +27,11 @@
           <td><%= contact.last_name %></td>
           <td><%= !!(contact.subscribed) ? 'Yes' : 'No' %></td>
           <td><%= contact.emaillist&.name %></td>
+          <td style="width: 32px;">
+            <%= link_to contact, class: 'btn btn-info btn-sm', remote: true do %>
+              <i class="fa fa-eye" aria-hidden="true"></i>
+            <% end %>
+          </td>
           <td style="width: 32px;">
             <%= link_to edit_contact_path(contact), class: 'btn btn-warning btn-sm' do %>
               <i class="fa fa-edit" aria-hidden="true"></i>
@@ -43,3 +48,4 @@
     </table>
   </div>
 </div>
+
