@@ -3,9 +3,9 @@ class Template < ApplicationRecord
   has_many :campaigns
   after_create :set_admin_default
 
-  def self.duplicate template, user
-    tmpl = template.dup
-    tmpl.name = template.name + "(1)"
+  def duplicate user
+    tmpl = self.dup
+    tmpl.name = self.name + "(1)"
     tmpl.admin_default = false
     tmpl.visible = true
     tmpl.user = user

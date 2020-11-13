@@ -7,7 +7,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :campaigns
+  resources :campaigns do
+    member do
+      post :duplicate
+    end
+  end
   resources :emaillists do
     member do
       get :add_contact

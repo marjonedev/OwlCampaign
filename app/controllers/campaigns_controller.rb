@@ -62,6 +62,21 @@ class CampaignsController < ApplicationController
     end
   end
 
+  def duplicate
+    @campaign = Campaign.find(params[:id])
+    @campaign = @campaign.duplicate
+
+    respond_to do |format|
+      if @campaign.save
+        format.html { redirect_to edit_campaign_url(@campaign), notice: 'Campaign was successfully copied.' }
+        format.json { render :edit, status: :created, location: @campaign }
+      else
+        format.html { redirect_to campaigns_url, alert: "Error copying the campaign" }
+        format.json { render json: @campaign.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_campaign

@@ -74,7 +74,7 @@ class TemplatesController < ApplicationController
 
   def duplicate
     @template = Template.find(params[:id])
-    @template = Template.duplicate(@template, current_user)
+    @template = @template.duplicate(current_user)
 
     respond_to do |format|
       if @template.save
