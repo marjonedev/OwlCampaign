@@ -14,4 +14,10 @@ class Campaign < ApplicationRecord
     cmp
   end
 
+  def date_time_send
+    dt = DateTime.parse(date_send.to_s + ' ' + time_send.to_formatted_s(:time))
+    dt.strftime("%d/%m/%Y %I:%M %p")
+    # time_send.to_formatted_s(:time)
+  end
+
 end
