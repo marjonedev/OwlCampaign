@@ -22,3 +22,12 @@ import './src/custom.css';
 global.$ = jQuery
 
 import "@fortawesome/fontawesome-free/js/all";
+import flatpickr from "flatpickr"
+require("flatpickr/dist/flatpickr.min.css")
+
+document.addEventListener("turbolinks:load", () => {
+    flatpickr("[data-behavior='flatpickr']", {
+        enableTime: true,
+        dateFormat: "Y-m-d H:i",
+    })
+})

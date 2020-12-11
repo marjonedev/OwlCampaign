@@ -44,10 +44,21 @@ class CampaignsController < ApplicationController
     respond_to do |format|
       if @campaign.update(campaign_params)
         format.html { redirect_to @campaign, notice: 'Campaign was successfully updated.' }
+        # format.html { redirect_to @campaign, notice: 'Campaign was successfully updated.' + campaign_params["datetime_send"] }
         format.json { render :show, status: :ok, location: @campaign }
       else
         format.html { render :edit }
         format.json { render json: @campaign.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def update_send
+    response_to do 'format'
+      if @campaign.update(campaign_params)
+        @campaign.send
+        format.html { redirect_to campaigns_url, notice: 'Campaign was successfully updated and added to queue for sending.' }
+        format.json { render :show, status: :ok, location: campaigns_url }
       end
     end
   end
@@ -85,6 +96,6 @@ class CampaignsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def campaign_params
-      params.require(:campaign).permit(:emaillist_id, :template_id, :from, :subject, :content, :date_send, :time_send)
+      params.require(:campaign).permit(:emaillist_id, :template_id, :name, :from_name, :from_email, :subject, :content, :datetime_send)
     end
 end

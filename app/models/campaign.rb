@@ -3,6 +3,16 @@ class Campaign < ApplicationRecord
   belongs_to :template
   has_many :emailsends
 
+  before_validation :set_datetime, on: [:create, :update]
+
+  def set_datetime
+    # self.datetime_send = DateTime.strptime(self.datetime_send, "%m-%d-%Y %I:%M %p")
+  end
+
+  def from
+    from_name ? from_name : from_email
+  end
+
   def duplicate
     cmp = self.dup
     cmp.name = self.name + "(1)"

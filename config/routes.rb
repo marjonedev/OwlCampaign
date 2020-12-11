@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   resources :campaigns do
     member do
       post :duplicate
+      patch :update_send
+      put :update_send
     end
   end
   resources :emaillists do

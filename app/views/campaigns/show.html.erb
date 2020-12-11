@@ -27,13 +27,9 @@
 
 <p>
   <strong>Date send:</strong>
-  <%= @campaign.date_send %>
+  <%= @campaign.datetime_send %>
 </p>
 
-<p>
-  <strong>Time send:</strong>
-  <%= @campaign.time_send %>
-</p>
 
 <%= link_to 'Edit', edit_campaign_path(@campaign) %> |
 <%= link_to 'Back', campaigns_path %>
