@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :emaillists
   has_many :contacts
   has_many :templates
+  has_many :campaigns
 
   validates_presence_of :username
   validates_confirmation_of :password

@@ -1,6 +1,7 @@
 class Campaign < ApplicationRecord
   belongs_to :emaillist
   belongs_to :template
+  belongs_to :user
   has_many :emailsends
 
   before_validation :set_datetime, on: [:create, :update]

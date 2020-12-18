@@ -22,12 +22,22 @@ import './src/custom.css';
 global.$ = jQuery
 
 import "@fortawesome/fontawesome-free/js/all";
+
 import flatpickr from "flatpickr"
 require("flatpickr/dist/flatpickr.min.css")
 
 document.addEventListener("turbolinks:load", () => {
     flatpickr("[data-behavior='flatpickr']", {
         enableTime: true,
+        altInput: true,
+        altFormat: "F j, Y G:i K",
         dateFormat: "Y-m-d H:i",
     })
 })
+
+
+import 'select2'
+import 'select2/dist/css/select2.css'
+$(document).ready(function() {
+    $('.select2').select2();
+});

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_11_205901) do
+ActiveRecord::Schema.define(version: 2020_12_18_181728) do
 
   create_table "campaigns", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.integer "emaillist_id"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2020_12_11_205901) do
     t.boolean "instant", default: false
     t.string "name"
     t.string "from_email"
+    t.integer "user_id", null: false
     t.index ["emaillist_id"], name: "index_campaigns_on_emaillist_id"
     t.index ["template_id"], name: "index_campaigns_on_template_id"
   end

@@ -5,7 +5,7 @@ class CampaignsController < ApplicationController
   # GET /campaigns
   # GET /campaigns.json
   def index
-    @campaigns = Campaign.all
+    @campaigns = current_user.campaigns
   end
 
   # GET /campaigns/1
@@ -15,17 +15,19 @@ class CampaignsController < ApplicationController
 
   # GET /campaigns/new
   def new
-    @campaign = Campaign.new
+    @campaign = current_user.campaigns.new
+    @templates = Template.where(admin_default: true, visible: true).or(current_user.templates.all).order(admin_default: :desc)
   end
 
   # GET /campaigns/1/edit
   def edit
+    @templates = Template.where(admin_default: true, visible: true).or(current_user.templates.all).order(admin_default: :desc)
   end
 
   # POST /campaigns
   # POST /campaigns.json
   def create
-    @campaign = Campaign.new(campaign_params)
+    @campaign = current_user.campaigns.new(campaign_params)
 
     respond_to do |format|
       if @campaign.save
