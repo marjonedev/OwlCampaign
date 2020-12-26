@@ -1,24 +1,13 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is the README for OwlCampaign, an email campaign platform. This platform
+enables users to create an account and build email lists of their customers,
+which they can use to communicate with their customers. We charge users based
+on the size of the email list they have created or the number of emails that
+they send every month.
 
-Things you may want to cover:
+* Email Templates / Designs
 
-* Ruby version
+* Campaigns and the audience that the campaign is sent to.
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Contacts and the customers that are represented by the Contact.
