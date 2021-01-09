@@ -89,6 +89,14 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
+  # REDIS = Redis.new(host: 'localhost', port: 6379, db: 1)
+
+  config.action_mailer.delivery_method = :sendmail
+
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  # config.action_mailer.default_options = {from: 'no-reply@owlcampaign.com'}
+
   # Inserts middleware to perform automatic connection switching.
   # The `database_selector` hash is used to pass options to the DatabaseSelector
   # middleware. The `delay` is used to determine how long to wait after a write

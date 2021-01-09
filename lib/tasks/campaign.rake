@@ -1,0 +1,2 @@
+namespace :campaign do
+end

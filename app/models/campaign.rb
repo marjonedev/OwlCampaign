@@ -31,4 +31,12 @@ class Campaign < ApplicationRecord
     # time_send.to_formatted_s(:time)
   end
 
+  def test_send
+    to = "marjone@owlreply.com"
+    from = "Marjone <marjonedev@gmail.com>"
+    subject = "Test Send from Owlcampaign"
+    body = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec iaculis sem turpis, non placerat diam suscipit eu. Suspendisse metus purus, gravida eu mi vel, eleifend euismod nunc."
+    CampaignMailer.with(to: to, from: from, subject: subject, body: body).send_campaign_email.deliver_now
+  end
+
 end

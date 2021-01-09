@@ -58,6 +58,14 @@ Rails.application.configure do
 
   # Raises error for missing translations.
   # config.action_view.raise_on_missing_translations = true
+  # REDIS = Redis.new(host: 'localhost', port: 6379, db: 1)
+
+  config.action_mailer.delivery_method = :sendmail
+  # config.action_mailer.default_url_options = { host: "owlcampaign.com", port: 25}
+
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  # config.action_mailer.default_options = {from: 'no-reply@owlcampaign.com'}
 
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
