@@ -1,0 +1,1 @@
+tail --lines=50 logs/development.log
