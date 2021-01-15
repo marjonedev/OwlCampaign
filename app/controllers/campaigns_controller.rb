@@ -45,7 +45,7 @@ class CampaignsController < ApplicationController
   def update
     respond_to do |format|
       if @campaign.update(campaign_params)
-        format.html { redirect_to @campaign, notice: 'Campaign was successfully updated.' }
+        format.html { redirect_to campaigns_url, notice: 'Campaign was successfully updated.' }
         # format.html { redirect_to @campaign, notice: 'Campaign was successfully updated.' + campaign_params["datetime_send"] }
         format.json { render :show, status: :ok, location: @campaign }
       else
