@@ -31,7 +31,7 @@ class CampaignsController < ApplicationController
 
     respond_to do |format|
       if @campaign.save
-        format.html { redirect_to @campaign, notice: 'Campaign was successfully created.' }
+        format.html { redirect_to campaigns_url, notice: 'Campaign was successfully created.' }
         format.json { render :show, status: :created, location: @campaign }
       else
         format.html { render :new }

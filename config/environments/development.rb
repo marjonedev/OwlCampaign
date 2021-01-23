@@ -65,6 +65,7 @@ Rails.application.configure do
 
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
+
   # config.action_mailer.default_options = {from: 'no-reply@owlcampaign.com'}
 
   # Use an evented file watcher to asynchronously detect changes in source code,
