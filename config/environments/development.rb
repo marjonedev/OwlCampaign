@@ -58,7 +58,7 @@ Rails.application.configure do
 
   # Raises error for missing translations.
   # config.action_view.raise_on_missing_translations = true
-  # REDIS = Redis.new(host: 'localhost', port: 6379, db: 1)
+  REDIS = Redis.new(host: 'localhost', port: 6379, db: 1)
 
   config.action_mailer.delivery_method = :sendmail
   # config.action_mailer.default_url_options = { host: "owlcampaign.com", port: 25}
