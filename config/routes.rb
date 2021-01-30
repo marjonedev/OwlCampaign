@@ -41,4 +41,15 @@ Rails.application.routes.draw do
   get 'logout' => 'session#destroy', :as => "logout"
 
   get 'forgot_password', to: 'pages#forgot_password'
+
+  # pages
+  get 'features', to: 'pages#features'
+  get 'pricing', to: 'pages#pricing'
+  get 'security', to: 'pages#security'
+  get 'guides', to: 'pages#guides'
+  get 'faqs', to: 'pages#faqs'
+  get 'about', to: 'pages#about'
+  get 'privacy', to: 'pages#privacy'
+  get 'terms', to: 'pages#terms'
+  get 'contact', to: 'pages#contact'
 end

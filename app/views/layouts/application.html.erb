@@ -6,13 +6,15 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>OwlCampaign</title>
+  <title><%= @page_title || 'Owl Campaign' %></title>
 
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_pack_tag 'styles', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+  <%= yield :javascript_includes %>
 </head>
 
 <body class="bg-light">
@@ -21,10 +23,10 @@
     <ul class="nav my-2 my-md-0 mr-md-3">
       <% if logged_in? %>
         <li class="nav-item">
-          <a class="nav-link p-2 text-dark" href="/dashboard">Dashboard</a>
+          <a class="<%= 'current' if current_page?(action: 'dashboard', controller: 'pages') %> nav-link p-2 text-dark" href="/dashboard">Dashboard</a>
         </li>
-        <li class="nav-item"><a class="nav-link p-2 text-dark" href="<%= campaigns_url %>">Campaigns</a></li>
-        <li class="nav-item"><a class="nav-link p-2 text-dark" href="<%= templates_url %>">Templates</a></li>
+        <li class="<%= 'current' if current_page?(action: 'index', controller: 'campaigns') %> nav-item"><a class="nav-link p-2 text-dark" href="<%= campaigns_url %>">Campaigns</a></li>
+        <li class="<%= 'current' if current_page?(action: 'index', controller: 'templates') %> nav-item"><a class="nav-link p-2 text-dark" href="<%= templates_url %>">Templates</a></li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle p-2 text-dark" href="#" id="subscribersNavLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Subscribers</a>
           <div class="dropdown-menu" aria-labelledby="subscribersNavLink">
@@ -35,9 +37,9 @@
         <li class="nav-item"><a class="nav-link p-2 text-dark" href="<%= user_url(current_user) %>">Account</a></li>
         <li class="nav-item"><a class="nav-link p-2 text-dark" href="/logout">Log Out</a></li>
       <% else %>
-        <li class="nav-item"><a class="nav-link p-2 text-dark" href="/">Home</a></li>
-        <li class="nav-item"><a class="nav-link p-2 text-dark" href="#">Features</a></li>
-        <li class="nav-item"><a class="nav-link p-2 text-dark" href="#">Pricing</a></li>
+        <li class="<%= 'current' if current_page?('/') %>"><a href="/" class="nav-link p-2 text-dark"><div>Home</div></a>
+        <li class="<%= 'current' if current_page?(action: 'features', controller: 'pages') %>"><a class="nav-link p-2 text-dark" href="/features"><div>Features</div></a>
+        <li class="<%= 'current' if current_page?(action: 'pricing', controller: 'pages') %>"><a class="nav-link p-2 text-dark" href="/pricing"><div>Pricing</div></a>
         <li class="nav-item"><a class="nav-link p-2 text-dark" href="/login">Log In</a></li>
       <% end %>
       <% unless current_page?('/signup') or logged_in? %>
@@ -55,33 +57,30 @@
       <div class="row">
         <div class="col-12 col-md">
           <h2>OwlCampaign</h2>
-          <small class="d-block mb-3 text-muted">&copy; 2020-2021</small>
+          <small class="d-block mb-3 text-muted">&copy; <%= Time.zone.now.year %>, All Rights Reserved. </small>
         </div>
         <div class="col-6 col-md">
           <h5>Products</h5>
           <ul class="list-unstyled text-small">
-            <li><a class="text-muted" href="#">Why OwlCampaign?</a></li>
-            <li><a class="text-muted" href="#">Features</a></li>
-            <li><a class="text-muted" href="#">Pricing</a></li>
-            <li><a class="text-muted" href="#">Security</a></li>
+            <li><a class="text-muted" href="/features">Features</a></li>
+            <li><a class="text-muted" href="/pricing">Pricing</a></li>
+            <li><a class="text-muted" href="/security">Security</a></li>
           </ul>
         </div>
         <div class="col-6 col-md">
           <h5>Help</h5>
           <ul class="list-unstyled text-small">
-            <li><a class="text-muted" href="#">Documentation</a></li>
-            <li><a class="text-muted" href="#">Guides and Tutorials</a></li>
-            <li><a class="text-muted" href="#">FAQs</a></li>
-            <li><a class="text-muted" href="#">Help</a></li>
+            <li><a class="text-muted" href="/guides">Guides and Tutorials</a></li>
+            <li><a class="text-muted" href="/faqs">FAQs</a></li>
           </ul>
         </div>
         <div class="col-6 col-md">
           <h5>About Us</h5>
           <ul class="list-unstyled text-small">
-            <li><a class="text-muted" href="#">About</a></li>
-            <li><a class="text-muted" href="#">Privacy</a></li>
-            <li><a class="text-muted" href="#">Terms</a></li>
-            <li><a class="text-muted" href="#">Contact</a></li>
+            <li><a class="text-muted" href="/about">About</a></li>
+            <li><a class="text-muted" href="/privacy">Privacy</a></li>
+            <li><a class="text-muted" href="/terms">Terms</a></li>
+            <li><a class="text-muted" href="/contact">Contact</a></li>
           </ul>
         </div>
       </div>
