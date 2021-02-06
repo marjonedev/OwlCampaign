@@ -90,6 +90,11 @@ class CampaignsController < ApplicationController
     end
   end
 
+  def preview
+    @campaign = current_user.campaigns.find(params[:id])
+    render :layout => false
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_campaign

@@ -55,4 +55,9 @@ class Campaign < ApplicationRecord
     # CampaignSchedulerJob.set(wait: self.datetime_send).perform_later(self)
   end
 
+  def content_full
+    self.template.content.to_s.gsub("%%content%%", self.content)
+    # self.template.content
+  end
+
 end

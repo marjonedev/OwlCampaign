@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       post :duplicate
       patch :update_send
       put :update_send
+      get :preview
     end
   end
   resources :emaillists do

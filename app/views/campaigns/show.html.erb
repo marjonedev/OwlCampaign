@@ -1,35 +1,47 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Emaillist:</strong>
-  <%= @campaign.emaillist_id %>
-</p>
+<% if notice %>
+  <div class="alert alert-secondary"><%= notice %></div>
+<% end %>
+<div class="p-3 bg-white rounded shadow-sm">
+  <h4 class="mb-0">
+    <%=@campaign.name%>
+    <%= link_to edit_campaign_url(@campaign), class: 'btn btn-light btn-sm float-right', title: "Edit Campaign" do %>
+      <i class="fa fa-edit" aria-hidden="true"></i> Edit
+    <% end %>
+  </h4>
+</div>
+<div class="row">
+  <div class="my-3 col-sm-12 col-md-4">
+    <div class="p-3 bg-white rounded shadow-sm">
+      <p>
+        <strong>Subject:</strong><br />
+        <%= @campaign.subject %>
+      </p>
+      <p>
+        <strong>From:</strong><br />
+        <%= @campaign.from_name ? "#{@campaign.from_name} <#{@campaign.from_email}>" : @campaign.from_email %>
+      </p>
+      <p>
+        <strong>Send to list:</strong><br />
+        <%= @campaign.emaillist.name %>
+      </p>
 
-<p>
-  <strong>Template:</strong>
-  <%= @campaign.template_id %>
-</p>
+      <p>
+        <strong>Template:</strong><br />
+        <%= @campaign.template.name %>
+      </p>
+      <p>
+        <strong>Date & time to send:</strong><br />
+        <%= @campaign.datetime_send_str %>
+      </p>
+    </div>
+  </div>
+  <div class="my-3 col-sm-12 col-md-8">
+    <div class="p-3 bg-white rounded shadow-sm">
+      <iframe id="templateModalFrame" src="<%= preview_campaign_url(@campaign) %>" width="100%" frameBorder="0">
+        //show template here
+      </iframe>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>From:</strong>
-  <%= @campaign.from %>
-</p>
-
-<p>
-  <strong>Subject:</strong>
-  <%= @campaign.subject %>
-</p>
-
-<p>
-  <strong>Content:</strong>
-  <%= @campaign.content %>
-</p>
-
-<p>
-  <strong>Date send:</strong>
-  <%= @campaign.datetime_send %>
-</p>
-
-
-<%= link_to 'Edit', edit_campaign_path(@campaign) %> |
-<%= link_to 'Back', campaigns_path %>
