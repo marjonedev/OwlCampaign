@@ -15,5 +15,6 @@
  */
 
 html {
-  background: #FFF;
+  background: #FFF !important;
+  height: 100%;
 }
