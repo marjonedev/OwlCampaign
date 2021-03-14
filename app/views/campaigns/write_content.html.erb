@@ -1,0 +1,22 @@
+<div class="mt-5 my-3 p-3 bg-white rounded shadow-sm">
+  <h4 class="pb-2 mb-0"><%= @campaign.subject %></h4>
+  <h5 class="border-bottom border-gray ">Write your new email content.</h5>
+  <div class="pt-3">
+    <% campaign = @campaign %>
+
+    <%= form_with(model: campaign, local: true, url: {action: :write_content, controller: :campaigns, id: @campaign.id}) do |form| %>
+
+      <div class="form-group">
+        <%= form.label :content %>
+        <%= form.text_area :content, class: "form-control", rows: 20 %>
+      </div>
+
+      <div class="actions">
+        <%= form.submit "Continue to Next Step", class: 'btn btn-secondary pl-3 pr-3' %>
+        <%= link_to "Cancel", campaigns_url, class: 'btn btn-light float-right'%>
+      </div>
+    <% end %>
+
+
+  </div>
+</div>

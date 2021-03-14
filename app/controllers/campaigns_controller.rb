@@ -1,5 +1,5 @@
 class CampaignsController < ApplicationController
-  before_action :set_campaign, only: [:show, :edit, :update, :destroy]
+  before_action :set_campaign, only: [:show, :edit, :update, :destroy, :choose_template, :write_content, :schedule_email]
   before_action :require_login
 
   # GET /campaigns
@@ -31,12 +31,35 @@ class CampaignsController < ApplicationController
 
     respond_to do |format|
       if @campaign.save
-        format.html { redirect_to campaigns_url, notice: 'Campaign was successfully created.' }
+        format.html { redirect_to action: :choose_template, controller: :campaigns, id: @campaign.id }
         format.json { render :show, status: :created, location: @campaign }
       else
         format.html { render :new }
         format.json { render json: @campaign.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def choose_template
+    if request.patch?
+      @campaign.update_attribute(:template_id, params[:template_id])
+      redirect_to action: :write_content, controller: :campaigns, id: @campaign.id
+    else
+      # Show the page to let them choose the template.
+    end
+  end
+
+  def write_content
+    if request.patch?
+      @campaign.update(campaign_params)
+      redirect_to action: :schedule_email, controller: :campaigns, id: @campaign.id
+    end
+  end
+
+  def schedule_email
+    if request.patch?
+      @campaign.update(campaign_params)
+      redirect_to :campaigns
     end
   end
 

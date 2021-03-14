@@ -9,6 +9,13 @@ Rails.application.routes.draw do
 
   resources :campaigns do
     member do
+      get :choose_template
+      patch :choose_template
+      get :write_content
+      patch :write_content
+      get :schedule_email
+      patch :schedule_email
+
       post :duplicate
       patch :update_send
       put :update_send

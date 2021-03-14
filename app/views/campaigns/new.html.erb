@@ -1,6 +1,44 @@
 <div class="mt-5 my-3 p-3 bg-white rounded shadow-sm">
   <h5 class="border-bottom border-gray pb-2 mb-0">New Campaign</h5>
   <div class="pt-3">
-    <%= render 'form', campaign: @campaign, locals: {method: 'new'} %>
+    <%#= render 'form', campaign: @campaign, locals: {method: 'new'} %>
+    <% campaign = @campaign %>
+
+    <%= form_with(model: campaign, local: true) do |form| %>
+
+      <% if campaign.errors.any? %>
+        <div id="error_explanation" class="alert alert-danger" role="alert">
+          <h6><%= pluralize(campaign.errors.count, "error") %> prohibited this campaign from being saved:</h6>
+
+          <ul>
+            <% campaign.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="form-group">
+        <%= form.label :subject, 'Email subject' %>
+        <%= form.text_field :subject, class: "form-control", required: "required" %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :from, 'From name' %>
+        <%= form.text_field :from_name, class: "form-control", required: "required" %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :from, 'From email address' %>
+        <%= form.text_field :from_email, class: "form-control", required: "required" %>
+      </div>
+
+      <div class="actions">
+        <%= form.submit "Continue to Next Step", class: 'btn btn-secondary pl-3 pr-3' %>
+        <%= link_to "Cancel", campaigns_url, class: 'btn btn-light float-right'%>
+      </div>
+    <% end %>
+
+
   </div>
 </div>

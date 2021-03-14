@@ -1,6 +1,6 @@
 class Campaign < ApplicationRecord
-  belongs_to :emaillist
-  belongs_to :template
+  belongs_to :emaillist, optional: true
+  belongs_to :template, optional: true
   belongs_to :user
   has_many :emailsends
 

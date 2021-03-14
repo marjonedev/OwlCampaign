@@ -1,0 +1,33 @@
+<div class="mt-5 my-3 p-3 bg-white rounded shadow-sm">
+  <h4 class="pb-2 mb-0"><%= @campaign.subject %></h4>
+  <h5 class="border-bottom border-gray ">Write your new email content.</h5>
+  <div class="pt-3">
+    <% campaign = @campaign %>
+
+    <%= form_with(model: campaign, local: true, url: {action: :schedule_email, controller: :campaigns, id: @campaign.id}) do |form| %>
+
+      <div class="form-group">
+        <%= form.label :emaillist_id, "Email list" %>
+        <select name="campaign[emaillist_id]" id="emaillist_ids" class="select2 form-control" required="required">
+          <% current_user.emaillists.each do |list| %>
+            <option value="<%= list.id %>">
+              <%= list.name %>
+            </option>
+          <% end %>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :datetime_send, "When to send" %>
+        <%= form.text_field :datetime_send, class: "form-control", data: {behavior: "flatpickr"} %>
+      </div>
+
+      <div class="actions">
+        <%= form.submit "Save and Schedule Email", class: 'btn btn-secondary pl-3 pr-3' %>
+        <%= link_to "Cancel", campaigns_url, class: 'btn btn-light float-right'%>
+      </div>
+    <% end %>
+
+
+  </div>
+</div>
