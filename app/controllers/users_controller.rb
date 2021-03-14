@@ -31,7 +31,7 @@ class UsersController < ApplicationController
       if @user.save
         session[:user_id] = @user.id # Make sure the user is logged in after signing in!
         session[:new_sign_up] = true
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html { redirect_to '/dashboard' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }

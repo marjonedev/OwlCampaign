@@ -1,1 +1,9 @@
-This is dashboard
+<h1>Recent Campaign Stats</h1>
+<% campaign = current_user.campaigns.last %>
+<div class="p-4 border">
+  <% if campaign %>
+    <%= campaign.name %>
+  <% else %>
+    You have no recent campaigns.
+  <% end %>
+</div>

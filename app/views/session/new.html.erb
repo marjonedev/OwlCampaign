@@ -10,10 +10,14 @@
   <% end %>
 
   <%= form_with model: @user, url: login_path, class: 'nobottommargin login-form', data: {remote: false} do |f| %>
-    <label for="inputUsername" class="sr-only">Username</label>
-    <%= f.text_field :username, class: 'form-control required', id: "inputUsername", placeholder: 'Username', required: 'required', autofocus: '' %>
-    <label for="inputPassword" class="sr-only">Password</label>
-    <%= f.password_field :password, class: 'form-control required', id: 'inputPassword', placeholder: 'Password', required: 'required' %>
+    <div class="pb-3">
+      <label for="inputUsername" class="sr-only">Username</label>
+      <%= f.text_field :username, class: 'form-control required', id: "inputUsername", placeholder: 'Username', required: 'required', autofocus: '' %>
+    </div>
+    <div>
+      <label for="inputPassword" class="sr-only">Password</label>
+      <%= f.password_field :password, class: 'form-control required', id: 'inputPassword', placeholder: 'Password', required: 'required' %>
+    </div>
     <!--<div class="checkbox mb-3">
       <label>
         <input type="checkbox" value="remember-me"> Remember me
