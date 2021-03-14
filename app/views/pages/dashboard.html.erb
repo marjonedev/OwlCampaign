@@ -1,9 +1,29 @@
 <h1>Recent Campaign Stats</h1>
 <% campaign = current_user.campaigns.last %>
-<div class="p-4 border">
+<div class="mt-3 my-1 p-3 bg-white rounded shadow-sm">
   <% if campaign %>
     <%= campaign.name %>
   <% else %>
     You have no recent campaigns.
   <% end %>
+</div>
+<div class="pt-5"></div>
+<h2>Quick Actions</h2>
+<div class="row">
+  <div class="col-md-3">
+    <div class="mt-3 my-1 p-3 bg-white rounded shadow-sm">
+      <h4>Find Subscriber</h4>
+      Email address:
+      <input type="text">
+      <!-- TBD -->
+    </div>
+  </div>
+  <div class="col-md-9">
+    <div class="mt-3 my-1 p-3 bg-white rounded shadow-sm">
+      <h4>Start New Campaign</h4>
+      Subject Line:
+      <input type="text">
+      <!-- TBD -->
+    </div>
+  </div>
 </div>
