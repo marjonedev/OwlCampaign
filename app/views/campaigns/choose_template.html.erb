@@ -3,5 +3,6 @@
   <div class="mt-1 border p-2">
     <%= template.name %>
     <%= link_to "Choose", {action: :choose_template, controller: :campaigns, id: @campaign.id}, method: :patch %>
+    <%# TO DO: In the future each one should be a little preview of the email template. %>
   </div>
 <% end %>

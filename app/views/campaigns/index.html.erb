@@ -10,7 +10,6 @@
     <table class="table table-sm table-borderless table-hover">
       <thead>
       <tr>
-        <th>Name</th>
         <th>Subject</th>
         <th>Recipients</th>
         <th>Date & Time</th>
@@ -21,7 +20,6 @@
       <tbody>
       <% @campaigns.each do |campaign| %>
         <tr>
-          <td><%= campaign.name %></td>
           <td><%= campaign.subject %></td>
           <td><%= campaign.emaillist.name %></td>
           <td><%= campaign.datetime_send_str %></td>
