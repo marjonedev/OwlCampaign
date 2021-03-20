@@ -21,7 +21,7 @@
       <% @campaigns.each do |campaign| %>
         <tr>
           <td><%= campaign.subject %></td>
-          <td><%= campaign.emaillist.name %></td>
+          <td><%= campaign.emaillist&.name %></td>
           <td><%= campaign.datetime_send_str %></td>
           <td><%= campaign.status.capitalize %></td>
           <td style="width: 32px;">

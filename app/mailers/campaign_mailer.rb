@@ -11,6 +11,6 @@ class CampaignMailer < ApplicationMailer
 
   def send_test
     @body = "loremipsum dolor sit test this is a test message hello world"
-    mail(to: "marjone@owlreply.com", subject: "Send Test from Owlcampaign")
+    mail(to: "marjonedev@gmail.com", subject: "Send Test from Owlcampaign")
   end
 end

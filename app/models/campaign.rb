@@ -28,8 +28,12 @@ class Campaign < ApplicationRecord
   end
 
   def datetime_send_str
-    dt = DateTime.parse(datetime_send.to_s)
-    dt.strftime("%d/%m/%Y %I:%M %p")
+    begin
+      dt = DateTime.parse(datetime_send.to_s)
+      dt.strftime("%d/%m/%Y %I:%M %p")
+    rescue => e
+      nil
+    end
   end
 
   def send_now

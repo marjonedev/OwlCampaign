@@ -60,8 +60,18 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
   REDIS = Redis.new(host: 'localhost', port: 6379, db: 1)
 
-  config.action_mailer.delivery_method = :sendmail
+  config.action_mailer.delivery_method = :smtp
   # config.action_mailer.default_url_options = { host: "owlcampaign.com", port: 25}
+
+  config.action_mailer.smtp_settings = {
+      :enable_starttls_auto => true,
+      :address        => Rails.application.credentials.ses_server_name,
+      :port           => 587,
+      :domain         => Rails.application.credentials.ses_domain,
+      :user_name      => Rails.application.credentials.ses_smtp_username,
+      :password       => Rails.application.credentials.ses_smtp_password,
+      :authentication => :plain
+  }
 
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
