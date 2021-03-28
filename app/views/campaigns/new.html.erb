@@ -4,7 +4,7 @@
     <%#= render 'form', campaign: @campaign, locals: {method: 'new'} %>
     <% campaign = @campaign %>
 
-    <%= form_with(model: campaign, local: true) do |form| %>
+    <%= form_with(model: campaign, local: true, class: 'row g-3') do |form| %>
 
       <% if campaign.errors.any? %>
         <div id="error_explanation" class="alert alert-danger" role="alert">
@@ -18,23 +18,23 @@
         </div>
       <% end %>
 
-      <div class="form-group">
-        <%= form.label :subject, 'Email subject' %>
+      <div class="form-group col-12">
+        <%= form.label :subject, 'Email subject', class: 'form-label' %>
         <%= form.text_field :subject, class: "form-control", required: "required" %>
       </div>
 
-      <div class="form-group">
-        <%= form.label :from, 'From name' %>
+      <div class="form-group col-md-6">
+        <%= form.label :from, 'From name', class: 'form-label' %>
         <%= form.text_field :from_name, class: "form-control", required: "required" %>
       </div>
 
-      <div class="form-group">
-        <%= form.label :from, 'From email address' %>
+      <div class="form-group col-md-6">
+        <%= form.label :from, 'From email address', class: 'form-label' %>
         <%= form.text_field :from_email, class: "form-control", required: "required", value: current_user.email_address, disabled: true %>
         <%# TO DO: Allow users to have multiple 'from' email addresses, but the user has to validate they own the address first. %>
       </div>
 
-      <div class="actions">
+      <div class="col-12">
         <%= form.submit "Continue to Next Step", class: 'btn btn-secondary pl-3 pr-3' %>
         <%= link_to "Cancel", campaigns_url, class: 'btn btn-light float-right'%>
       </div>

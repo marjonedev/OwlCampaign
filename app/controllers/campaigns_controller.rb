@@ -5,7 +5,7 @@ class CampaignsController < ApplicationController
   # GET /campaigns
   # GET /campaigns.json
   def index
-    @campaigns = current_user.campaigns
+    @campaigns = current_user.campaigns.order("id DESC")
   end
 
   # GET /campaigns/1

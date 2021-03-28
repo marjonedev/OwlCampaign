@@ -1,8 +1,13 @@
-<h1>Pick A Template For Your Email</h1>
-<% for template in current_user.templates %>
-  <div class="mt-1 border p-2">
-    <%= template.name %>
-    <%= link_to "Choose", {action: :choose_template, controller: :campaigns, id: @campaign.id}, method: :patch %>
-    <%# TO DO: In the future each one should be a little preview of the email template. %>
+
+<div class="mt-5 my-3 p-3 bg-white rounded shadow-sm">
+  <h5 class="border-bottom border-gray pb-2 mb-0">Pick A Template For Your Email</h5>
+  <div class="pt-3">
+    <% for template in current_user.templates %>
+      <div class="mt-1 border p-2">
+        <%= template.name %>
+        <%= link_to "Choose", {action: :choose_template, controller: :campaigns, id: @campaign.id}, method: :patch %>
+        <%# TO DO: In the future each one should be a little preview of the email template. %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>
