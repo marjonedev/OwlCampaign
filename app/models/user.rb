@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many :contacts
   has_many :templates
   has_many :campaigns
+  has_many :from_emails
 
   validates_presence_of :username
   validates_confirmation_of :password
@@ -21,6 +22,7 @@ class User < ApplicationRecord
   before_validation :set_initial_content, on: [:create]
   before_validation :lowercase_username
   after_create :create_default_emaillist
+  after_create :create_initial_from_email
 
   def set_initial_content
     self.password = self.email_address
@@ -65,6 +67,10 @@ class User < ApplicationRecord
     save!
   end
 
+  def create_initial_from_email
+    FromEmail.create(user_id: self.id, email_address: self.email_address, default: true, confirmed: true)
+  end
+
   protected
   # before filter
     def encrypt_password
@@ -80,6 +86,10 @@ class User < ApplicationRecord
   private
     def generate_token
       SecureRandom.hex(10)
+    end
+
+    def generate_email_token
+      SecureRandom.urlsafe_base64.to_s
     end
 
     def address_exist_validator
