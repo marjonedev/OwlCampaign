@@ -34,6 +34,13 @@
             <a class="dropdown-item" href="<%= emaillists_url %>">Email List</a>
           </div>
         </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle p-2 text-dark" href="#" id="subscribersNavLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
+          <div class="dropdown-menu" aria-labelledby="subscribersNavLink">
+            <a class="dropdown-item" href="<%= from_emails_url %>">From Emails</a>
+            <a class="dropdown-item" href="<%= user_url(current_user) %>">Account Detail</a>
+          </div>
+        </li>
         <li class="nav-item"><a class="nav-link p-2 text-dark" href="<%= user_url(current_user) %>">Account</a></li>
         <li class="nav-item"><a class="nav-link p-2 text-dark" href="/logout">Log Out</a></li>
       <% else %>

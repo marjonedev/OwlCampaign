@@ -32,6 +32,8 @@ Rails.application.routes.draw do
   resources :contacts
   resources :users
 
+  resources :from_emails
+
   class OnlyAjaxRequest
     def matches?(request)
       request.xhr?

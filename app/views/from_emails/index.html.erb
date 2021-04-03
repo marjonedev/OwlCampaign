@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>From Emails</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Email Address</th>
+      <th>Confirmed</th>
+      <th>Default</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @from_emails.each do |email| %>
+      <tr>
+        <td><%= email.email_address %></td>
+        <td><%= email.confirmed ? 'Confirmed' : 'Not Confirmed' %></td>
+        <td><%= email.Default ? 'Yes' : 'No' %></td>
+        <td><%= link_to 'Resend Confirmation', '#' %></td>
+        <td><%= link_to 'Edit', edit_from_emails_path(email) %></td>
+        <td><%= link_to 'Destroy', email, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
