@@ -30,7 +30,7 @@
 
       <div class="form-group col-md-6">
         <%= form.label :from, 'From email address', class: 'form-label' %>
-        <%= form.text_field :from_email, class: "form-control", required: "required", value: current_user.email_address, disabled: true %>
+        <%= form.text_field :from_email, class: "form-control disabled", required: "required", value: current_user.email_address, readonly: true %>
         <%# TO DO: Allow users to have multiple 'from' email addresses, but the user has to validate they own the address first. %>
       </div>
 

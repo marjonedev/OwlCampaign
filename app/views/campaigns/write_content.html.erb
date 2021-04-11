@@ -1,8 +1,9 @@
 <div class="mt-5 my-3 p-3 bg-white rounded shadow-sm">
-  <h4 class="pb-2 mb-0"><%= @campaign.subject %></h4>
   <h5 class="border-bottom border-gray ">Write your new email content.</h5>
+  <h4 class="pb-2 mb-0"><%= @campaign.subject %></h4>
   <div class="pt-3">
     <% campaign = @campaign %>
+
 
     <%= form_with(model: campaign, local: true, url: {action: :write_content, controller: :campaigns, id: @campaign.id}) do |form| %>
 

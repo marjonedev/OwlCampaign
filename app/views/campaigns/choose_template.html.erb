@@ -1,13 +1,46 @@
 
 <div class="mt-5 my-3 p-3 bg-white rounded shadow-sm">
   <h5 class="border-bottom border-gray pb-2 mb-0">Pick A Template For Your Email</h5>
-  <div class="pt-3">
+  <div class="row pt-3">
     <% for template in current_user.templates %>
-      <div class="mt-1 border p-2">
-        <%= template.name %>
-        <%= link_to "Choose", {action: :choose_template, controller: :campaigns, id: @campaign.id}, method: :patch %>
-        <%# TO DO: In the future each one should be a little preview of the email template. %>
+      <div class="col-auto mb-3">
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title"><%= template.name %></h5>
+<!--            Todo: This will be the preview image part.-->
+          </div>
+          <div class="card-footer bg-transparent">
+            <%= link_to "Choose", {action: :choose_template, controller: :campaigns, id: @campaign.id}, class: 'btn btn-primary btn-sm float-left', method: :patch %>
+            <%= link_to template_url(template), class: 'btn btn-info btn-sm float-right', title: "Preview", remote: true, data: {name: template.name} do %>
+              Preview
+            <% end %>
+          </div>
+        </div>
       </div>
     <% end %>
+  </div>
+</div>
+
+
+<div class="modal fade" id="templateShowModal" data-backdrop="static" tabindex="-1" aria-labelledby="templateShowModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="templateShowModalLabel">Template preview for <span id="templateModalName"></span></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="templateModalContent">
+          <iframe id="templateModalFrame" src="" width="100%" frameBorder="0">
+            //show template here
+          </iframe>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
   </div>
 </div>
