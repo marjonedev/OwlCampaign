@@ -1,7 +1,6 @@
 <div class="mt-5 my-3 p-3 bg-white rounded shadow-sm">
   <h5 class="border-bottom border-gray pb-2 mb-0">Edit Campaign</h5>
   <div class="pt-3">
-    <span><%= @templates %></span>
     <%= render 'edit_form', campaign: @campaign, locals: {method: 'edit'} %>
   </div>
 </div>

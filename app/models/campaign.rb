@@ -79,19 +79,17 @@ class Campaign < ApplicationRecord
       4.2 Date
 =end
   def get_step
-    if self.status == "incomplete"
-      unless self.subject or self.from_name or self.from_email
-        return "step1"
-      end
-      unless self.template_id
-        return "step2"
-      end
-      unless self.content
-        return "step3"
-      end
-      unless self.emaillist_id or self.datetime_send
-        return "step4"
-      end
+    unless self.subject or self.from_name or self.from_email
+      return "step1"
+    end
+    unless self.template
+      return "step2"
+    end
+    unless self.content
+      return "step3"
+    end
+    unless self.emaillist_id or self.datetime_send
+      return "step4"
     end
 
     "complete"

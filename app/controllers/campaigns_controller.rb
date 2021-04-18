@@ -55,9 +55,14 @@ class CampaignsController < ApplicationController
   def choose_template
     if request.patch?
       respond_to do |format|
-        if @campaign.update_attribute(:template_id, params[:template_id])
-          format.json { redirect_to action: :write_content, controller: :campaigns, id: @campaign.id }
-          format.json { render :show, status: :ok, location: @campaign }
+        if @campaign.update(campaign_params)
+          if @campaign.get_step == "complete"
+            @campaign.update_attribute(:status, 'scheduled')
+            format.html { redirect_to :campaigns, notice: 'Success. Campaign was successfully scheduled.' }
+          else
+            format.html { redirect_to action: :write_content, controller: :campaigns, id: @campaign.id }
+            format.json { render :show, status: :ok, location: @campaign }
+          end
         else
           format.html { render :edit }
           format.json { render json: @campaign.errors, status: :unprocessable_entity }
@@ -72,8 +77,13 @@ class CampaignsController < ApplicationController
     if request.patch?
       respond_to do |format|
         if @campaign.update(campaign_params)
-          format.json { redirect_to action: :schedule_email, controller: :campaigns, id: @campaign.id }
-          format.json { render :show, status: :ok, location: @campaign }
+          if @campaign.get_step == "complete"
+            @campaign.update_attribute(:status, 'scheduled')
+            format.html { redirect_to :campaigns, notice: 'Success. Campaign was successfully scheduled.' }
+          else
+            format.html { redirect_to action: :schedule_email, controller: :campaigns, id: @campaign.id }
+            format.json { render :show, status: :ok, location: @campaign }
+          end
         else
           format.html { render :edit }
           format.json { render json: @campaign.errors, status: :unprocessable_entity }
@@ -86,8 +96,9 @@ class CampaignsController < ApplicationController
     if request.patch?
       respond_to do |format|
         if @campaign.update(campaign_params)
+          #todo: check first if all completed
           @campaign.update_attribute(:status, 'scheduled')
-          format.json { redirect_to :campaigns, notice: 'Success. Campaign was successfully scheduled.' }
+          format.html { redirect_to :campaigns, notice: 'Success. Campaign was successfully scheduled.' }
           format.json { render :show, status: :ok, location: @campaign }
         else
           format.html { render :edit }
