@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_06_153606) do
+ActiveRecord::Schema.define(version: 2021_04_03_150851) do
 
   create_table "action_mailbox_inbound_emails", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "status", default: 0, null: false
@@ -93,6 +93,17 @@ ActiveRecord::Schema.define(version: 2021_03_06_153606) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["campaign_id"], name: "index_emailsends_on_campaign_id"
     t.index ["contact_id"], name: "index_emailsends_on_contact_id"
+  end
+
+  create_table "from_emails", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "email_address"
+    t.integer "user_id", null: false
+    t.boolean "confirmed", default: false
+    t.string "confirm_token"
+    t.boolean "default", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_from_emails_on_user_id"
   end
 
   create_table "templates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
