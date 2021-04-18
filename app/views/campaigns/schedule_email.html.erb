@@ -4,7 +4,7 @@
   <div class="pt-3">
     <% campaign = @campaign %>
 
-    <%= form_with(model: campaign, local: true, url: {action: :schedule_email, controller: :campaigns, id: @campaign.id}) do |form| %>
+    <%= form_with model: @campaign, url: schedule_email_campaign_url(@campaign) do |form| %>
 
       <div class="form-group">
         <%= form.label :emaillist_id, "Email list" %>
@@ -19,7 +19,7 @@
 
       <div class="form-group">
         <%= form.label :datetime_send, "When to send" %>
-        <%= form.text_field :datetime_send, class: "form-control", data: {behavior: "flatpickr"} %>
+        <%= form.text_field :datetime_send, class: "form-control required", data: {behavior: "flatpickr"}, required: "required" %>
       </div>
 
       <div class="actions">

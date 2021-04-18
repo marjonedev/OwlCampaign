@@ -10,8 +10,11 @@
 <!--            Todo: This will be the preview image part.-->
           </div>
           <div class="card-footer bg-transparent">
-            <%= link_to "Choose", {action: :choose_template, controller: :campaigns, id: @campaign.id}, class: 'btn btn-primary btn-sm float-left', method: :patch %>
-            <%= link_to template_url(template), class: 'btn btn-info btn-sm float-right', title: "Preview", remote: true, data: {name: template.name} do %>
+            <%= form_with model: @campaign, url: choose_template_campaign_url(@campaign) do |form| %>
+              <%= form.hidden_field :template_id, value: template.id %>
+              <%= form.submit "Choose", class: 'btn btn-primary btn-sm float-left' %>
+            <% end %>
+             <%= link_to template_url(template), class: 'btn btn-info btn-sm float-right', title: "Preview", remote: true, data: {name: template.name} do %>
               Preview
             <% end %>
           </div>

@@ -1,4 +1,5 @@
 class CampaignsController < ApplicationController
+
   before_action :set_campaign, only: [:show, :edit, :update, :destroy, :choose_template, :write_content, :schedule_email]
   before_action :require_login
 
@@ -21,7 +22,18 @@ class CampaignsController < ApplicationController
 
   # GET /campaigns/1/edit
   def edit
+
+    @step = @campaign.get_step
+    if @step == "step2"
+      redirect_to action: :choose_template, controller: :campaigns, id: @campaign.id
+    elsif @step == "step3"
+      redirect_to action: :write_content, controller: :campaigns, id: @campaign.id
+    elsif @step == "step4"
+      redirect_to action: :schedule_email, controller: :campaigns, id: @campaign.id
+    end
+
     @templates = Template.where(admin_default: true, visible: true).or(current_user.templates.all).order(admin_default: :desc)
+
   end
 
   # POST /campaigns
@@ -42,8 +54,15 @@ class CampaignsController < ApplicationController
 
   def choose_template
     if request.patch?
-      @campaign.update_attribute(:template_id, params[:template_id])
-      redirect_to action: :write_content, controller: :campaigns, id: @campaign.id
+      respond_to do |format|
+        if @campaign.update_attribute(:template_id, params[:template_id])
+          format.json { redirect_to action: :write_content, controller: :campaigns, id: @campaign.id }
+          format.json { render :show, status: :ok, location: @campaign }
+        else
+          format.html { render :edit }
+          format.json { render json: @campaign.errors, status: :unprocessable_entity }
+        end
+      end
     else
       # Show the page to let them choose the template.
     end
@@ -51,15 +70,30 @@ class CampaignsController < ApplicationController
 
   def write_content
     if request.patch?
-      @campaign.update(campaign_params)
-      redirect_to action: :schedule_email, controller: :campaigns, id: @campaign.id
+      respond_to do |format|
+        if @campaign.update(campaign_params)
+          format.json { redirect_to action: :schedule_email, controller: :campaigns, id: @campaign.id }
+          format.json { render :show, status: :ok, location: @campaign }
+        else
+          format.html { render :edit }
+          format.json { render json: @campaign.errors, status: :unprocessable_entity }
+        end
+      end
     end
   end
 
   def schedule_email
     if request.patch?
-      @campaign.update(campaign_params)
-      redirect_to :campaigns
+      respond_to do |format|
+        if @campaign.update(campaign_params)
+          @campaign.update_attribute(:status, 'scheduled')
+          format.json { redirect_to :campaigns, notice: 'Success. Campaign was successfully scheduled.' }
+          format.json { render :show, status: :ok, location: @campaign }
+        else
+          format.html { render :edit }
+          format.json { render json: @campaign.errors, status: :unprocessable_entity }
+        end
+      end
     end
   end
 
@@ -79,7 +113,7 @@ class CampaignsController < ApplicationController
   end
 
   def update_send
-    response_to do 'format'
+    response_to do |format|
       if @campaign.update(campaign_params)
         @campaign.send
         format.html { redirect_to campaigns_url, notice: 'Campaign was successfully updated and added to queue for sending.' }

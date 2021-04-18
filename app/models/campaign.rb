@@ -1,3 +1,9 @@
+=begin
+  Campaign Status
+  1. incomplete
+  2. scheduled
+  3. sent
+=end
 class Campaign < ApplicationRecord
   belongs_to :emaillist, optional: true
   belongs_to :template, optional: true
@@ -60,8 +66,35 @@ class Campaign < ApplicationRecord
   end
 
   def content_full
-    self.template.content.to_s.gsub("%%content%%", self.content)
+    self.template.content.to_s.gsub("%%content%%", self.content.to_s)
     # self.template.content
+  end
+
+=begin
+  1.1. Email Subject
+  1.2. From
+    2.1. Template
+    3.1 Content
+      4.1 Email List
+      4.2 Date
+=end
+  def get_step
+    if self.status == "incomplete"
+      unless self.subject or self.from_name or self.from_email
+        return "step1"
+      end
+      unless self.template_id
+        return "step2"
+      end
+      unless self.content
+        return "step3"
+      end
+      unless self.emaillist_id or self.datetime_send
+        return "step4"
+      end
+    end
+
+    "complete"
   end
 
 end

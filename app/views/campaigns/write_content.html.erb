@@ -5,11 +5,11 @@
     <% campaign = @campaign %>
 
 
-    <%= form_with(model: campaign, local: true, url: {action: :write_content, controller: :campaigns, id: @campaign.id}) do |form| %>
+    <%= form_with model: @campaign, url: write_content_campaign_url(@campaign) do |form| %>
 
       <div class="form-group">
         <%= form.label :content %>
-        <%= form.text_area :content, class: "form-control", rows: 20 %>
+        <%= form.text_area :content, class: "form-control", rows: 20, required: "required" %>
       </div>
 
       <div class="actions">

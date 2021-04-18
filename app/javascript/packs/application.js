@@ -32,6 +32,17 @@ document.addEventListener("turbolinks:load", () => {
         altInput: true,
         altFormat: "F j, Y G:i K",
         dateFormat: "Y-m-d H:i",
+        allowInput: true,
+        onReady: function (selectedDates, dateStr, instance){
+            console.log(selectedDates, dateStr, instance)
+        },
+        onOpen: function(selectedDates, dateStr, instance) {
+            $(instance.altInput).prop('readonly', true);
+        },
+        onClose: function(selectedDates, dateStr, instance) {
+            $(instance.altInput).prop('readonly', false);
+            $(instance.altInput).blur();
+        }
     })
 })
 
@@ -41,3 +52,4 @@ import 'select2/dist/css/select2.css'
 $(document).ready(function() {
     $('.select2').select2();
 });
+
