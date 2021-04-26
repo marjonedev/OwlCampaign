@@ -4,7 +4,7 @@
 <% end %>
 <div class="p-3 bg-white rounded shadow-sm">
   <h4 class="mb-0">
-    <%=@campaign.name%>
+    <%=@campaign.subject%>
     <%= link_to edit_campaign_url(@campaign), class: 'btn btn-light btn-sm float-right', title: "Edit Campaign" do %>
       <i class="fa fa-edit" aria-hidden="true"></i> Edit
     <% end %>
@@ -13,10 +13,6 @@
 <div class="row">
   <div class="my-3 col-sm-12 col-md-4">
     <div class="p-3 bg-white rounded shadow-sm">
-      <p>
-        <strong>Subject:</strong><br />
-        <%= @campaign.subject %>
-      </p>
       <p>
         <strong>From:</strong><br />
         <%= @campaign.from_name ? "#{@campaign.from_name} <#{@campaign.from_email}>" : @campaign.from_email %>

@@ -12,8 +12,9 @@
         <%= form.text_area :content, class: "form-control", rows: 20, required: "required" %>
       </div>
 
-      <div class="actions">
-        <%= form.submit "Continue to Next Step", class: 'btn btn-secondary pl-3 pr-3' %>
+      <div class="actions border-top border-gray pt-2">
+        <%= link_to "Back", choose_template_campaign_url(@campaign), class: 'btn btn-secondary pl-3 pr-3' %>
+        <%= form.submit "Continue to Next Step", class: 'btn btn-primary pl-3 pr-3' %>
         <%= link_to "Cancel", campaigns_url, class: 'btn btn-light float-right'%>
       </div>
     <% end %>

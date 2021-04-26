@@ -1,10 +1,9 @@
 <div class="mt-5 my-3 p-3 bg-white rounded shadow-sm">
-  <h5 class="border-bottom border-gray pb-2 mb-0">New Campaign</h5>
+  <h5 class="border-bottom border-gray pb-2 mb-0">Email Subject and From</h5>
   <div class="pt-3">
-    <%#= render 'form', campaign: @campaign, locals: {method: 'new'} %>
     <% campaign = @campaign %>
 
-    <%= form_with(model: campaign, local: true, class: 'row g-3') do |form| %>
+    <%= form_with(model: campaign, url: campaign_subject_campaign_url(@campaign), class: 'row g-3') do |form| %>
 
       <% if campaign.errors.any? %>
         <div id="error_explanation" class="alert alert-danger" role="alert">

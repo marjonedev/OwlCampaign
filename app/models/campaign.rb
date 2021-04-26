@@ -24,10 +24,9 @@ class Campaign < ApplicationRecord
 
   def duplicate
     cmp = self.dup
-    cmp.name = self.name + "(1)"
-    cmp.status = 'draft'
-    cmp.date_send = nil
-    cmp.time_send = nil
+    cmp.subject = self.subject + "(1)"
+    cmp.status = 'incomplete'
+    cmp.datetime_send = nil
     cmp.instant = nil
 
     cmp
@@ -79,7 +78,13 @@ class Campaign < ApplicationRecord
       4.2 Date
 =end
   def get_step
-    unless self.subject or self.from_name or self.from_email
+    unless self.subject
+      return "step1"
+    end
+    unless self.from_name
+      return "step1"
+    end
+    unless self.from_email
       return "step1"
     end
     unless self.template
@@ -88,7 +93,10 @@ class Campaign < ApplicationRecord
     unless self.content
       return "step3"
     end
-    unless self.emaillist_id or self.datetime_send
+    unless self.emaillist_id
+      return "step4"
+    end
+    unless self.datetime_send
       return "step4"
     end
 

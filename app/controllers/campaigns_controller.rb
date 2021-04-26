@@ -1,6 +1,6 @@
 class CampaignsController < ApplicationController
 
-  before_action :set_campaign, only: [:show, :edit, :update, :destroy, :choose_template, :write_content, :schedule_email]
+  before_action :set_campaign, only: [:show, :edit, :update, :destroy, :campaign_subject, :choose_template, :write_content, :schedule_email]
   before_action :require_login
 
   # GET /campaigns
@@ -17,7 +17,6 @@ class CampaignsController < ApplicationController
   # GET /campaigns/new
   def new
     @campaign = current_user.campaigns.new
-    @templates = Template.where(admin_default: true, visible: true).or(current_user.templates.all).order(admin_default: :desc)
   end
 
   # GET /campaigns/1/edit
@@ -52,23 +51,32 @@ class CampaignsController < ApplicationController
     end
   end
 
+  def campaign_subject
+    if request.patch?
+      respond_to do |format|
+        if @campaign.update(campaign_params)
+          format.html { redirect_to choose_template_campaign_url(@campaign) }
+          format.json { render :show, status: :ok, location: @campaign }
+        end
+      end
+    else
+
+    end
+  end
+
   def choose_template
     if request.patch?
       respond_to do |format|
         if @campaign.update(campaign_params)
-          if @campaign.get_step == "complete"
-            @campaign.update_attribute(:status, 'scheduled')
-            format.html { redirect_to :campaigns, notice: 'Success. Campaign was successfully scheduled.' }
-          else
-            format.html { redirect_to action: :write_content, controller: :campaigns, id: @campaign.id }
-            format.json { render :show, status: :ok, location: @campaign }
-          end
+          format.html { redirect_to action: :write_content, controller: :campaigns, id: @campaign.id }
+          format.json { render :show, status: :ok, location: @campaign }
         else
           format.html { render :edit }
           format.json { render json: @campaign.errors, status: :unprocessable_entity }
         end
       end
     else
+      @templates = Template.where(admin_default: true, visible: true).or(current_user.templates.all).order(admin_default: :desc)
       # Show the page to let them choose the template.
     end
   end
@@ -77,13 +85,8 @@ class CampaignsController < ApplicationController
     if request.patch?
       respond_to do |format|
         if @campaign.update(campaign_params)
-          if @campaign.get_step == "complete"
-            @campaign.update_attribute(:status, 'scheduled')
-            format.html { redirect_to :campaigns, notice: 'Success. Campaign was successfully scheduled.' }
-          else
-            format.html { redirect_to action: :schedule_email, controller: :campaigns, id: @campaign.id }
-            format.json { render :show, status: :ok, location: @campaign }
-          end
+          format.html { redirect_to action: :schedule_email, controller: :campaigns, id: @campaign.id }
+          format.json { render :show, status: :ok, location: @campaign }
         else
           format.html { render :edit }
           format.json { render json: @campaign.errors, status: :unprocessable_entity }

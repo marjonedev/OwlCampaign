@@ -2,7 +2,7 @@
 <div class="mt-5 my-3 p-3 bg-white rounded shadow-sm">
   <h5 class="border-bottom border-gray pb-2 mb-0">Pick A Template For Your Email</h5>
   <div class="row pt-3">
-    <% for template in current_user.templates %>
+    <% for template in @templates %>
       <div class="col-auto mb-3">
         <div class="card" style="width: 18rem;">
           <div class="card-body">
@@ -21,6 +21,12 @@
         </div>
       </div>
     <% end %>
+  </div>
+  <div class="row">
+    <div class="col-12 border-top border-gray pt-2">
+      <%= link_to "Back", campaign_subject_campaign_url(@campaign), class: 'btn btn-secondary pl-3 pr-3' %>
+      <%= link_to "Cancel", campaigns_url, class: 'btn btn-light float-right'%>
+    </div>
   </div>
 </div>
 

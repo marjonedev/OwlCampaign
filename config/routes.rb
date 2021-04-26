@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   resources :campaigns do
     member do
+      get :campaign_subject
+      patch :campaign_subject
       get :choose_template
       patch :choose_template
       get :write_content

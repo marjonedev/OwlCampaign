@@ -1,6 +1,6 @@
 <div class="mt-5 my-3 p-3 bg-white rounded shadow-sm">
-  <h4 class="pb-2 mb-0"><%= @campaign.subject %></h4>
-  <h5 class="border-bottom border-gray ">Write your new email content.</h5>
+  <h4 class="pb-2 mb-2"><%= @campaign.subject %></h4>
+  <h5 class="border-bottom border-gray ">Schedule Your Email</h5>
   <div class="pt-3">
     <% campaign = @campaign %>
 
@@ -22,8 +22,9 @@
         <%= form.text_field :datetime_send, class: "form-control required", data: {behavior: "flatpickr"}, required: "required" %>
       </div>
 
-      <div class="actions">
-        <%= form.submit "Save and Schedule Email", class: 'btn btn-secondary pl-3 pr-3' %>
+      <div class="actions border-top border-gray pt-2">
+        <%= link_to "Back", write_content_campaign_url(@campaign), class: 'btn btn-secondary pl-3 pr-3' %>
+        <%= form.submit "Save and Schedule Email", class: 'btn btn-primary pl-3 pr-3' %>
         <%= link_to "Cancel", campaigns_url, class: 'btn btn-light float-right'%>
       </div>
     <% end %>
