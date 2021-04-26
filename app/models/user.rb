@@ -68,7 +68,7 @@ class User < ApplicationRecord
   end
 
   def create_initial_from_email
-    FromEmail.create(user_id: self.id, email_address: self.email_address, default: true, confirmed: true)
+    FromEmail.create(user_id: self.id, email_address: self.email_address, default: true, confirmed: false)
   end
 
   protected

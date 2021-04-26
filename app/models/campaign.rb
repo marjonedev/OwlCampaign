@@ -9,6 +9,7 @@ class Campaign < ApplicationRecord
   belongs_to :template, optional: true
   belongs_to :user
   has_many :emailsends
+  belongs_to :from_email
 
   before_validation :set_datetime, on: [:create, :update]
   # after_commit :send_campaign_job, on: :create
