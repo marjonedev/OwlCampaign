@@ -2,23 +2,29 @@
 <div class="mt-5 my-3 p-3 bg-white rounded shadow-sm">
   <h5 class="border-bottom border-gray pb-2 mb-0">Pick A Template For Your Email</h5>
   <div class="row pt-3">
-    <% for template in @templates %>
-      <div class="col-auto mb-3">
-        <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title"><%= template.name %></h5>
-<!--            Todo: This will be the preview image part.-->
-          </div>
-          <div class="card-footer bg-transparent">
-            <%= form_with model: @campaign, url: choose_template_campaign_url(@campaign) do |form| %>
-              <%= form.hidden_field :template_id, value: template.id %>
-              <%= form.submit "Choose", class: 'btn btn-primary btn-sm float-left' %>
-            <% end %>
-             <%= link_to template_url(template), class: 'btn btn-info btn-sm float-right', title: "Preview", remote: true, data: {name: template.name} do %>
-              Preview
-            <% end %>
+    <% if @templates.size > 0 %>
+      <% for template in @templates %>
+        <div class="col-auto mb-3">
+          <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title"><%= template.name %></h5>
+  <!--            Todo: This will be the preview image part.-->
+            </div>
+            <div class="card-footer bg-transparent">
+              <%= form_with model: @campaign, url: choose_template_campaign_url(@campaign) do |form| %>
+                <%= form.hidden_field :template_id, value: template.id %>
+                <%= form.submit "Choose", class: 'btn btn-primary btn-sm float-left' %>
+              <% end %>
+               <%= link_to template_url(template), class: 'btn btn-info btn-sm float-right', title: "Preview", remote: true, data: {name: template.name} do %>
+                Preview
+              <% end %>
+            </div>
           </div>
         </div>
+      <% end %>
+    <% else %>
+      <div class="col-md-12 pb-3">
+        You have no template at the moment. <a href="<%= templates_url %>" class="btn btn-dark btn-sm">Create new template now!</a>
       </div>
     <% end %>
   </div>

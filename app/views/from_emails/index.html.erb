@@ -11,6 +11,7 @@
       <thead>
       <tr>
         <th>Email Address</th>
+        <th>Default From Name</th>
         <th>Confirmed</th>
         <th>Default</th>
         <th></th>
@@ -20,6 +21,7 @@
       <% @from_emails.each do |email| %>
         <tr>
           <td><%= email.email_address %></td>
+          <td><%= email.name %></td>
           <td><%= email.confirmed ? 'Confirmed' : 'Not Confirmed' %></td>
           <td><%= email.default ? 'Yes' : 'No' %></td>
           <td style="width: 120px;">

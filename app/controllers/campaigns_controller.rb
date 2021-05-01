@@ -38,7 +38,7 @@ class CampaignsController < ApplicationController
   # POST /campaigns
   # POST /campaigns.json
   def create
-    @campaign = current_user.campaigns.new(campaign_params)
+   @campaign = current_user.campaigns.new(campaign_params)
 
     respond_to do |format|
       if @campaign.save
@@ -174,6 +174,6 @@ class CampaignsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def campaign_params
-      params.require(:campaign).permit(:emaillist_id, :template_id, :name, :from_name, :from_email, :subject, :content, :datetime_send)
+      params.require(:campaign).permit(:emaillist_id, :template_id, :name, :from_name, :from_email_id, :subject, :content, :datetime_send)
     end
 end

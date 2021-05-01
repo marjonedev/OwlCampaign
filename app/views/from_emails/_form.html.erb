@@ -18,6 +18,11 @@
   </div>
 
   <div class="form-group">
+    <%= form.label :name, "From Name" %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
     <div class="form-check">
       <%= form.check_box :default, class: 'form-check-input' %>
       <%= form.label :default, class: 'form-check-label'%>
@@ -26,7 +31,7 @@
 
   <div class="form-group row border-top border-gray pt-2">
     <div class="col-md-12">
-      <button type="submit" class="btn btn-primary pl-4 pr-4 mr-2"> Create </button> <%= link_to "Cancel", from_emails_url, :class => 'btn btn-light float-right' %>
+      <button type="submit" class="btn btn-primary pl-4 pr-4 mr-2"> Save </button> <%= link_to "Cancel", from_emails_url, :class => 'btn btn-light float-right' %>
     </div>
   </div>
 <% end %>

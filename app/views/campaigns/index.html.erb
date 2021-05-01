@@ -7,7 +7,7 @@
     <%= link_to 'Create New', new_campaign_url, class: 'btn btn-primary btn-sm' %>
   </div>
   <div class="pt-3">
-    <table class="table table-sm table-borderless table-hover">
+    <table class="table table-sm table-hover">
       <thead>
       <tr>
         <th>Subject</th>
@@ -18,28 +18,34 @@
       </tr>
       </thead>
       <tbody>
-      <% @campaigns.each do |campaign| %>
+      <% if @campaigns.empty? %>
         <tr>
-          <td><%= campaign.subject %></td>
-          <td><%= campaign.emaillist&.name %></td>
-          <td><%= campaign.datetime_send_str %></td>
-          <td><%= campaign.status.capitalize %></td>
-          <td style="width: 32px;">
-            <%= link_to campaign, class: 'btn btn-info btn-sm', title: "Preview" do %>
-              <i class="fa fa-eye" aria-hidden="true"></i>
-            <% end %>
-          </td>
-          <td style="width: 32px;">
-            <%= link_to edit_campaign_url(campaign), class: 'btn btn-warning btn-sm', title: "Edit Campaign" do %>
-              <i class="fa fa-edit" aria-hidden="true"></i>
-            <% end %>
-          </td>
-          <td style="width: 32px;">
-            <%= link_to duplicate_campaign_url(campaign), class: 'btn btn-secondary btn-sm', title: "Duplicate", method: :post do %>
-              <i class="fa fa-copy" aria-hidden="true"></i>
-            <% end %>
-          </td>
+          <td class="text-center" colspan="5">No campaign available at the moment.</td>
         </tr>
+      <% else %>
+        <% @campaigns.each do |campaign| %>
+          <tr>
+            <td><%= campaign.subject %></td>
+            <td><%= campaign.emaillist&.name %></td>
+            <td><%= campaign.datetime_send_str %></td>
+            <td><%= campaign.status.capitalize %></td>
+            <td style="width: 32px;">
+              <%= link_to campaign, class: 'btn btn-info btn-sm', title: "Preview" do %>
+                <i class="fa fa-eye" aria-hidden="true"></i>
+              <% end %>
+            </td>
+            <td style="width: 32px;">
+              <%= link_to edit_campaign_url(campaign), class: 'btn btn-warning btn-sm', title: "Edit Campaign" do %>
+                <i class="fa fa-edit" aria-hidden="true"></i>
+              <% end %>
+            </td>
+            <td style="width: 32px;">
+              <%= link_to duplicate_campaign_url(campaign), class: 'btn btn-secondary btn-sm', title: "Duplicate", method: :post do %>
+                <i class="fa fa-copy" aria-hidden="true"></i>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
       <% end %>
       </tbody>
     </table>

@@ -9,11 +9,13 @@ class Campaign < ApplicationRecord
   belongs_to :template, optional: true
   belongs_to :user
   has_many :emailsends
-  belongs_to :from_email
+  belongs_to :from_email, optional: true
 
   before_validation :set_datetime, on: [:create, :update]
   # after_commit :send_campaign_job, on: :create
   after_create :send_campaign_job
+  before_create :set_from_email
+  before_update :set_from_email
 
   def set_datetime
     # self.datetime_send = DateTime.strptime(self.datetime_send, "%m-%d-%Y %I:%M %p")
@@ -29,6 +31,7 @@ class Campaign < ApplicationRecord
     cmp.status = 'incomplete'
     cmp.datetime_send = nil
     cmp.instant = nil
+    cmp.status = "incomplete"
 
     cmp
   end
@@ -85,7 +88,7 @@ class Campaign < ApplicationRecord
     unless self.from_name
       return "step1"
     end
-    unless self.from_email
+    unless self.from_email_id
       return "step1"
     end
     unless self.template
@@ -102,6 +105,11 @@ class Campaign < ApplicationRecord
     end
 
     "complete"
+  end
+
+  private
+  def set_from_email
+    self.from_email_address = FromEmail.find(self.from_email_id).email_address
   end
 
 end
