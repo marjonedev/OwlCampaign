@@ -27,15 +27,15 @@ import flatpickr from "flatpickr"
 require("flatpickr/dist/flatpickr.min.css")
 
 document.addEventListener("turbolinks:load", () => {
+    var dt = new Date();
+    dt.setMinutes( dt.getMinutes() + 30 );
     flatpickr("[data-behavior='flatpickr']", {
         enableTime: true,
         altInput: true,
         altFormat: "F j, Y G:i K",
         dateFormat: "Y-m-d H:i",
+        defaultDate: dt,
         allowInput: true,
-        onReady: function (selectedDates, dateStr, instance){
-            console.log(selectedDates, dateStr, instance)
-        },
         onOpen: function(selectedDates, dateStr, instance) {
             $(instance.altInput).prop('readonly', true);
         },

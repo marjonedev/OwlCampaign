@@ -15,7 +15,7 @@
     <div class="p-3 bg-white rounded shadow-sm">
       <p>
         <strong>From:</strong><br />
-        <%= @campaign.from_name ? "#{@campaign.from_name} <#{@campaign.from_email}>" : @campaign.from_email %>
+        <%= @campaign.from_name ? "#{@campaign.from_name} <#{@campaign.from_email.email_address}>" : @campaign.from_email %>
       </p>
       <p>
         <strong>Send to list:</strong><br />
