@@ -54,3 +54,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'sidekiq'
+
+gem "net-http"
+
+gem "aws-sdk-sns", ">= 1.9.0", require: false
