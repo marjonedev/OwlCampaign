@@ -56,8 +56,10 @@ class Campaign < ApplicationRecord
     end
   end
 
-  def self.test_send
-    to = "marjone@owlreply.com"
+  def self.test_send(who)
+    #to = "marjone@owlreply.com"
+    to = "kopf1988@gmail.com"
+    to = who
     from = "Marjone <marjonedev@gmail.com>"
     subject = "Test Send from Owlcampaign"
     body = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec iaculis sem turpis, non placerat diam suscipit eu. Suspendisse metus purus, gravida eu mi vel, eleifend euismod nunc."

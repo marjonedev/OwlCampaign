@@ -63,14 +63,25 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   # config.action_mailer.default_url_options = { host: "owlcampaign.com", port: 25}
 
+  # config.action_mailer.smtp_settings = {
+  #   :enable_starttls_auto => true,
+  #   :address        => Rails.application.credentials.ses_server_name,
+  #   :port           => 587,
+  #   :domain         => Rails.application.credentials.ses_domain,
+  #   :user_name      => Rails.application.credentials.ses_smtp_username,
+  #   :password       => Rails.application.credentials.ses_smtp_password,
+  #   :authentication => :plain
+  # }
+
   config.action_mailer.smtp_settings = {
-      :enable_starttls_auto => true,
-      :address        => Rails.application.credentials.ses_server_name,
-      :port           => 587,
-      :domain         => Rails.application.credentials.ses_domain,
-      :user_name      => Rails.application.credentials.ses_smtp_username,
-      :password       => Rails.application.credentials.ses_smtp_password,
-      :authentication => :plain
+    #:enable_starttls_auto => true,
+    :address        => "54.85.73.180",
+    :port           => 2525,
+    :domain         => "owlcampaign.com",
+    # :user_name      => "",
+    # :password       => "",
+    # :authentication => :plain,
+    :openssl_verify_mode => 'none'
   }
 
   config.action_mailer.perform_deliveries = true
