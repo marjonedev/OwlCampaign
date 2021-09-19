@@ -1,7 +1,7 @@
 =begin
   Campaign Status
   1. incomplete
-  2. scheduled
+  2. pending
   3. sent
 =end
 class Campaign < ApplicationRecord
@@ -71,7 +71,12 @@ class Campaign < ApplicationRecord
   end
 
   def content_full
-    self.template.content.to_s.gsub("%%content%%", self.content.to_s)
+    content = self.content ? self.content.to_s : ''
+    if self.template
+      self.template.content.to_s.gsub("%%content%%", content)
+    else
+      ''
+    end
     # self.template.content
   end
 

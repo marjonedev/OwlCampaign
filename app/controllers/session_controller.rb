@@ -7,7 +7,7 @@ class SessionController < ApplicationController
   end
 
   def create
-    redirect_url = params[:redirect_to] ? URI.decode(params[:redirect_to]) : root_url
+    redirect_url = params[:redirect_to] ? URI.decode_www_form_component(params[:redirect_to]) : root_url
     if @attempted_user&.can_authenticate_with?(params[:user][:password])
       session[:user_id] = @attempted_user.id
       redirect_to redirect_url, id: @attempted_user.id

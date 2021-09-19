@@ -44,3 +44,7 @@ textarea#template_content{
 ul.nav li.current a{
     font-weight: bold;
 }
+
+*[data-href]{
+    cursor: pointer;
+}

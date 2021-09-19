@@ -13,11 +13,6 @@
   <% end %>
 
   <div class="form-group">
-    <%= form.label :name, 'Campaign name' %>
-    <%= form.text_field :name, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
     <%= form.label :subject, 'Email subject' %>
     <%= form.text_field :subject, class: "form-control", required: "required" %>
   </div>
@@ -28,15 +23,21 @@
   </div>
 
   <div class="form-group">
-    <%= form.label :from, 'From email address' %>
-    <%= form.text_field :from_email, class: "form-control", required: "required" %>
+    <%= form.label :from_email_id, 'From email address', class: 'form-label' %>
+    <select name="campaign[from_email_id]" id="from_email_id" class="select2 form-control" required="required">
+      <% current_user.from_emails.where(confirmed: true).each do |from| %>
+        <option data-name="<%= from.name %>" value="<%= from.id %>" <% campaign.from_email_id == from.id ? "selected" : "" %>>
+          <%= from.email_address %>
+        </option>
+      <% end %>
+    </select>
   </div>
 
   <div class="form-group">
     <%= form.label :emaillist_id, "Email list" %>
     <select name="campaign[emaillist_id]" id="emaillist_ids" class="select2 form-control" required="required">
       <% current_user.emaillists.each do |list| %>
-        <option value="<%= list.id %>">
+        <option value="<%= list.id %>" <% campaign.emaillist_id == list.id ? "selected" : "" %>>
           <%= list.name %>
         </option>
       <% end %>
@@ -47,7 +48,7 @@
     <%= form.label :template_id, "Template" %>
     <select name="campaign[template_id]" id="template_ids" class="select2 form-control" required="required">
       <% @templates.each do |template| %>
-        <option value="<%= template.id %>">
+        <option value="<%= template.id %>" <% campaign.template_id == template.id ? "selected" : "" %>>
           <%= template.name %>
         </option>
       <% end %>
@@ -65,8 +66,7 @@
   </div>
 
   <div class="actions">
-    <%= form.submit "Save", class: 'btn btn-secondary pl-3 pr-3' %>
-    <%= form.submit "Save and Send", class: 'btn btn-primary ml-3', formaction: update_send_campaign_path(campaign) %>
-    <%= link_to "Cancel", campaigns_url, class: 'btn btn-light float-right'%>
+    <%= form.submit "Save", class: 'btn btn-secondary px-4' %>
+     <%= link_to "Cancel", campaigns_url, class: 'btn btn-light float-right'%>
   </div>
 <% end %>
