@@ -1,29 +1,64 @@
-<h1>Recent Campaign Stats</h1>
-<% campaign = current_user.campaigns.last %>
-<div class="mt-3 my-1 p-3 bg-white rounded shadow-sm">
-  <% if campaign %>
-    <%= campaign.name %>
+
+<div class="mt-4 my-1 p-3 pb-4 bg-white shadow-sm">
+  <h3 class="pb-3">Recent Campaigns</h3>
+  <% if @campaigns %>
+    <div class="list-group recent-campaigns">
+    <% for campaign in @campaigns %>
+        <a href="<%= campaign_url(campaign) %>" class="list-group-item list-group-item-action" aria-current="true">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1"><%= campaign.subject %></h5>
+            <span class="badge bg-<%=campaign.status %> rounded-pill"><%= campaign&.status.capitalize %></span>
+          </div>
+          <p class="mb-1"><small>From: <%= campaign.from_name %> &lt;<%=  campaign.from_email.email_address %>&gt;</small></p>
+          <span class="datetime_send"><%= campaign.datetime_send&.strftime("%B %d, %Y %I:%M %P") %></span>
+        </a>
+    <% end %>
+    </div>
   <% else %>
-    You have no recent outgoing emails.
+    You have no recent campaigns.
   <% end %>
 </div>
-<div class="pt-5"></div>
-<h2>Quick Actions</h2>
-<div class="row">
-  <div class="col-md-3">
-    <div class="mt-3 my-1 p-3 bg-white rounded shadow-sm">
-      <h4>Find Subscriber</h4>
-      Email address:
-      <input type="text">
-      <!-- TBD -->
+<div class="bg-white shadow-sm mt-4 my-1 p-3 pb-4 quick-actions">
+  <h3 class="pb-3">Quick Actions</h3>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Find Subscriber</h5>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" aria-describedby="button-addon2">
+            <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="fa fa-search"></i></button>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="col-md-9">
-    <div class="mt-3 my-1 p-3 bg-white rounded shadow-sm">
-      <h4>Start New Campaign</h4>
-      Subject Line:
-      <input type="text">
-      <!-- TBD -->
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Start New Campaign</h5>
+          <form id="newCampaignForm">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" id="newCampaign" placeholder="Subject Line" required="required">
+            <button class="btn btn-outline-secondary" type="button" id="newCampaignBtn"><i class="fa fa-paper-plane"></i></button>
+          </div>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
+
+<script type="text/javascript">
+  $(function(){
+      $('#newCampaignBtn').on('click', function (e){
+          e.preventDefault();
+          const form = document.getElementById("newCampaignForm");
+          if(form.checkValidity()){
+            window.location.href = '<%= new_campaign_url %>?subject=' + $('#newCampaign').val();
+          }else{
+              form.reportValidity();
+          }
+      });
+  })
+</script>

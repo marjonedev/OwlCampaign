@@ -17,6 +17,7 @@ class CampaignsController < ApplicationController
   # GET /campaigns/new
   def new
     @campaign = current_user.campaigns.new
+    @subject = params[:subject]
   end
 
   # GET /campaigns/1/edit
@@ -100,7 +101,7 @@ class CampaignsController < ApplicationController
       respond_to do |format|
         if @campaign.update(campaign_params)
           #todo: check first if all completed
-          @campaign.update_attribute(:status, 'scheduled')
+          @campaign.update_attribute(:status, 'pending')
           format.html { redirect_to :campaigns, notice: 'Success. Campaign was successfully scheduled.' }
           format.json { render :show, status: :ok, location: @campaign }
         else

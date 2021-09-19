@@ -6,6 +6,11 @@ class PagesController < ApplicationController
   end
 
   def dashboard
+    if logged_in?
+      @campaigns = current_user.campaigns.where("status != ?", 'incomplete').order("id desc").limit(10)
+    else
+      redirect_to pages_home_url
+    end
   end
 
   def forgot_password
