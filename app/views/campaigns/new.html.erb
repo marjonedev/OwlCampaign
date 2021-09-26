@@ -19,18 +19,23 @@
       <% end %>
 
       <div class="form-group col-12">
-        <%= form.label :subject, 'Email subject', class: 'form-label' %>
+        <%= form.label :name, 'Campaign Name', class: 'form-label' %>
+        <%= form.text_field :name, class: "form-control", required: "required" %>
+      </div>
+
+      <div class="form-group col-12">
+        <%= form.label :subject, 'Subject', class: 'form-label' %>
         <% subject = @subject ? @subject : '' %>
         <%= form.text_field :subject, class: "form-control", required: "required", value: subject %>
       </div>
 
       <div class="form-group col-md-6">
-        <%= form.label :from_name, 'From name', class: 'form-label' %>
-        <%= form.text_field :from_name, id: "from_name", class: "form-control", required: "required", value: current_user.from_emails.where(default: true).first.name %>
+        <%= form.label :from_name, 'Who is it from?', class: 'form-label' %>
+        <%= form.text_field :from_name, id: "from_name", class: "form-control", placeholder: "Name", required: "required", value: current_user.from_emails.where(default: true).first.name %>
       </div>
 
       <div class="form-group col-md-6">
-        <%= form.label :from_email_id, "From email address", class: 'form-label' %>
+        <label class="form-label">&nbsp;</label>
         <select name="campaign[from_email_id]" id="from_email_id" class="select2 form-control" required="required">
           <% current_user.from_emails.where(confirmed: true).each do |from| %>
             <option data-name="<%= from.name %>" value="<%= from.id %>">
