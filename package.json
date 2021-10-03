@@ -9,6 +9,7 @@
     "@rails/webpacker": "4.3.0",
     "bootstrap": "^4.6.0",
     "flatpickr": "^4.6.9",
+    "grapesjs": "^0.17.26",
     "jquery": "3.5.1",
     "popper.js": "^1.16.1",
     "select2": "^4.1.0-rc.0",
