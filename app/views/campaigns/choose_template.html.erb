@@ -2,10 +2,20 @@
 <div class="mt-5 my-3 p-3 bg-white rounded shadow-sm">
   <h5 class="border-bottom border-gray pb-2 mb-0">Pick A Template For Your Email</h5>
   <div class="row pt-3">
+    <div class="col-auto mb-3">
+      <%= link_to write_content_campaign_url(@campaign) do %>
+      <div class="card h-100" style="width: 18rem;">
+        <div class="card-body text-center">
+          <i class="fa fa-plus fa-3x text-muted" aria-hidden="true"></i>
+          <h4 class="text-muted">Create Custom</h4>
+        </div>
+      </div>
+      <% end %>
+    </div>
     <% if @templates.size > 0 %>
       <% for template in @templates %>
         <div class="col-auto mb-3">
-          <div class="card" style="width: 18rem;">
+          <div class="card  h-100" style="width: 18rem;">
             <div class="card-body">
               <h5 class="card-title"><%= template.name %></h5>
   <!--            Todo: This will be the preview image part.-->
@@ -22,10 +32,10 @@
           </div>
         </div>
       <% end %>
-    <% else %>
-      <div class="col-md-12 pb-3">
-        You have no template at the moment. <a href="<%= templates_url %>" class="btn btn-dark btn-sm">Create new template now!</a>
-      </div>
+    <%# else %>
+<!--      <div class="col-md-12 pb-3">-->
+<!--        You have no template at the moment. <a href="<%#= templates_url %>" class="btn btn-dark btn-sm">Create new template now!</a>-->
+<!--      </div>-->
     <% end %>
   </div>
   <div class="row">

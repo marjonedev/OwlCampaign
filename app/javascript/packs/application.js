@@ -19,6 +19,8 @@ require("channels")
 import 'bootstrap';
 import './src/application.scss';
 import './src/custom.css';
+window.jQuery = $;
+window.$ = $;
 global.$ = jQuery
 
 import "@fortawesome/fontawesome-free/js/all";

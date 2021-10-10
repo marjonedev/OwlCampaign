@@ -10,7 +10,6 @@
     <table class="table table-sm table-hover">
       <thead>
       <tr>
-        <th>Name</th>
         <th>Subject</th>
         <th>Recipients</th>
         <th>Date & Time</th>
@@ -26,7 +25,6 @@
       <% else %>
         <% @campaigns.each do |campaign| %>
           <tr data-href="<%= campaign_url(campaign) %>">
-            <td><%= campaign.name %></td>
             <td><%= campaign.subject %></td>
             <td><%= campaign.emaillist&.name %></td>
             <td><%= campaign.datetime_send_str %></td>
