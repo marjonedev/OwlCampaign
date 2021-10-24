@@ -4,10 +4,9 @@
 // that code so it'll be compiled.
 
 require("@rails/ujs").start()
-require("turbolinks").start()  //I always comment out
+require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
-require('jquery') //Add this
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
@@ -17,14 +16,12 @@ require('jquery') //Add this
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
+import 'bootstrap';
+import './src/application.scss';
+import './src/custom.css';
 window.jQuery = $;
 window.$ = $;
 global.$ = jQuery
-
-import 'bootstrap';
-import * as bootstrap from 'bootstrap';
-import './application.scss';
-import '../stylesheets/custom.css';
 
 import "@fortawesome/fontawesome-free/js/all";
 
